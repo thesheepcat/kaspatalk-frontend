@@ -15,12 +15,8 @@ const SendMessageBox = () => {
     
     const handleSendMessageButton = async () => {
         try {
-            //console.log("selectedPeer")
-            //console.log(selectedPeer)
-            //console.log("userPrivKey")
-            //console.log(userPrivKey)
-            console.log("networkIdentifier")
-            console.log(networkIdentifier)
+            //console.log("networkIdentifier")
+            //console.log(networkIdentifier)
             await sendTransaction(userPrivKey, selectedPeer, messageText, networkIdentifier);
             setMessageText("");
         } catch (sendingTransactionError) {
@@ -43,7 +39,9 @@ const SendMessageBox = () => {
                         onChange={handleMessageTextChange}
                         />
                 </div>
-                <button onClick={handleSendMessageButton} className={styles.sendButton}>
+                <button 
+                    className={styles.sendButton}
+                    onClick={handleSendMessageButton}>
                     <FontAwesomeIcon icon={faPaperPlane} className={styles.sendButtonIcon}/>
                 </button>
         </div>

@@ -1,17 +1,27 @@
 import styles from "./ContentHeader.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisV, faSearch } from '@fortawesome/free-solid-svg-icons';
-import profilePicture1 from "../assets/profile-1.png";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import { GeneralContextProvider} from "../contextProviders/GeneralContextProvider.jsx";
+import { toSvg } from "jdenticon";
 
 const ContentHeader = () => {
-    const {selectedPeer} = useContext(GeneralContextProvider);
+    const { selectedPeer } = useContext(GeneralContextProvider);
+    const [ peerImage, setPeerImage] = useState();
     
+    // Dynamically create peer image
+    useEffect(() => {
+        const imageFromSelectedPeerName = toSvg(selectedPeer, 100);
+        console.log(imageFromSelectedPeerName);
+        const encodedSvg = encodeURIComponent(imageFromSelectedPeerName);
+        const imageDataUrl = `data:image/svg+xml;charset=UTF-8,${encodedSvg}`;
+        setPeerImage(imageDataUrl);
+    }, [selectedPeer])
+
     return(
         <div className={styles.contentHeader}>
                 <div className={styles.image}>
-                    <img src={profilePicture1} alt="" />
+                    <img src={peerImage} alt="" />
                 </div>
                 <div className= {styles.details}>
                     <span className={styles.detailsTitle}>{selectedPeer}</span>

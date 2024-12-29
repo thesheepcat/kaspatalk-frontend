@@ -59,6 +59,8 @@
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
+    border-color: transparent;
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
     background-color: #6dc1b4;
     color: #ffffff;
     font-size: 1rem;
@@ -71,6 +73,11 @@
 .sendButtonIcon {
     width: 40%;
     height: 40%;
-    color: #ffffff;
 }
 
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
