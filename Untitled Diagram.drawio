@@ -40,8 +40,8 @@
         <mxCell id="rrDGJ7W3yIeW_5tvvOGc-15" value="All blocks added to the BlockDAG, including all transactions data" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="240" y="272" width="200" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="rrDGJ7W3yIeW_5tvvOGc-16" value="All messages from/to other peers/addresses" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="281" y="595" width="160" height="70" as="geometry" />
+        <mxCell id="rrDGJ7W3yIeW_5tvvOGc-16" value="Peers list and all messages from/to all peers/addresses" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="281" y="603" width="160" height="50" as="geometry" />
         </mxCell>
         <mxCell id="rrDGJ7W3yIeW_5tvvOGc-17" value="New transaction with a single Output and the message as payload" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="833" y="370" width="137" height="70" as="geometry" />
