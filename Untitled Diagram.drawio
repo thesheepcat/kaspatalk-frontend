@@ -1,44 +1,59 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="26.0.1">
   <diagram name="Page-1" id="F1tejZDly55zgPq2v-Ex">
-    <mxGraphModel dx="1434" dy="793" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1195" dy="661" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="RufVIqokz7fm9M4IkpAS-2" value="rusty-kaspa node (=&amp;gt; v0.15.4 10 BPS&amp;nbsp;&lt;div&gt;with payload on transactions activated)&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=14;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="40" y="10" width="800" height="140" as="geometry" />
+          <mxGeometry x="40" y="80" width="920" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="rrDGJ7W3yIeW_5tvvOGc-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="RufVIqokz7fm9M4IkpAS-2" target="rrDGJ7W3yIeW_5tvvOGc-4">
+        <mxCell id="rrDGJ7W3yIeW_5tvvOGc-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.218;exitY=0.993;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" edge="1" parent="1" source="RufVIqokz7fm9M4IkpAS-2" target="rrDGJ7W3yIeW_5tvvOGc-4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="rrDGJ7W3yIeW_5tvvOGc-4" value="KaspaTalk backend" style="whiteSpace=wrap;html=1;fontSize=14;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="40" y="320" width="400" height="120" as="geometry" />
+          <mxGeometry x="40" y="390" width="400" height="120" as="geometry" />
         </mxCell>
         <mxCell id="rrDGJ7W3yIeW_5tvvOGc-6" value="KaspaTalk frontend" style="whiteSpace=wrap;html=1;fontSize=14;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="440" y="520" width="400" height="120" as="geometry" />
+          <mxGeometry x="560" y="590" width="400" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="rrDGJ7W3yIeW_5tvvOGc-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="rrDGJ7W3yIeW_5tvvOGc-6" target="RufVIqokz7fm9M4IkpAS-2">
+        <mxCell id="rrDGJ7W3yIeW_5tvvOGc-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="639.5" y="440" as="sourcePoint" />
-            <mxPoint x="639.5" y="320" as="targetPoint" />
+            <mxPoint x="830" y="590" as="sourcePoint" />
+            <mxPoint x="830" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="rrDGJ7W3yIeW_5tvvOGc-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="rrDGJ7W3yIeW_5tvvOGc-4" target="rrDGJ7W3yIeW_5tvvOGc-6">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="190.5" y="350" as="sourcePoint" />
-            <mxPoint x="190" y="670" as="targetPoint" />
+            <mxPoint x="190.5" y="420" as="sourcePoint" />
+            <mxPoint x="190" y="740" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="rrDGJ7W3yIeW_5tvvOGc-10" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); font-size: 12px; font-weight: normal;&quot;&gt;RPC (for Testnet-11: port 17120)&lt;/span&gt;&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="150" y="116" width="180" height="30" as="geometry" />
+          <mxGeometry x="150" y="186" width="180" height="30" as="geometry" />
         </mxCell>
         <mxCell id="rrDGJ7W3yIeW_5tvvOGc-11" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); font-size: 12px; font-weight: normal;&quot;&gt;RPC (for Testnet-11: port 17120)&lt;/span&gt;&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="550" y="116" width="180" height="30" as="geometry" />
+          <mxGeometry x="550" y="186" width="180" height="30" as="geometry" />
         </mxCell>
         <mxCell id="rrDGJ7W3yIeW_5tvvOGc-12" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); font-size: 12px; font-weight: normal;&quot;&gt;REST API endpoint (port 3000)&lt;/span&gt;&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;verticalAlign=middle;align=center;" vertex="1" parent="1">
-          <mxGeometry x="150" y="408" width="180" height="30" as="geometry" />
+          <mxGeometry x="150" y="478" width="180" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="rrDGJ7W3yIeW_5tvvOGc-14" value="All blocks added to the BlockDAG" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontColor=default;" vertex="1" parent="1">
-          <mxGeometry x="242" y="200" width="163" height="60" as="geometry" />
+        <mxCell id="rrDGJ7W3yIeW_5tvvOGc-15" value="All blocks added to the BlockDAG, including all transactions data" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="240" y="272" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rrDGJ7W3yIeW_5tvvOGc-16" value="All messages from/to other peers/addresses" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="281" y="595" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rrDGJ7W3yIeW_5tvvOGc-17" value="New transaction with a single Output and the message as payload" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="833" y="370" width="137" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rrDGJ7W3yIeW_5tvvOGc-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="705" y="220" as="sourcePoint" />
+            <mxPoint x="705" y="590" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rrDGJ7W3yIeW_5tvvOGc-20" value="All spendable UTXOs" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="600" y="370" width="110" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
