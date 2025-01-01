@@ -2,12 +2,13 @@ import { useContext, useState } from "react";
 import styles from "./SendMessageBox.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceSmile, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { GeneralContextProvider} from "../contextProviders/GeneralContextProvider.jsx";
+import { GeneralContextProvider} from "../ContextProviders/GeneralContextProvider.jsx";
 import { sendTransaction } from "../../utils/sendTransaction.js";
 
 const SendMessageBox = () => {
     const {selectedPeer, userPrivKey, networkIdentifier} = useContext(GeneralContextProvider);
     const [ messageText, setMessageText ] = useState("");
+    const [ isSendingMessage, setIsSendingMessage ] = useState(false);
 
     const handleMessageTextChange = (event) => {
         setMessageText(event.target.value)
@@ -15,9 +16,9 @@ const SendMessageBox = () => {
     
     const handleSendMessageButton = async () => {
         try {
-            //console.log("networkIdentifier")
-            //console.log(networkIdentifier)
+            setIsSendingMessage(true);
             await sendTransaction(userPrivKey, selectedPeer, messageText, networkIdentifier);
+            setIsSendingMessage(false);
             setMessageText("");
         } catch (sendingTransactionError) {
             console.log("sendingTransactionError")
@@ -40,7 +41,7 @@ const SendMessageBox = () => {
                         />
                 </div>
                 <button 
-                    className={styles.sendButton}
+                    className={isSendingMessage ? styles.sendButtonWhileSending : styles.sendButton}
                     onClick={handleSendMessageButton}>
                     <FontAwesomeIcon icon={faPaperPlane} className={styles.sendButtonIcon}/>
                 </button>

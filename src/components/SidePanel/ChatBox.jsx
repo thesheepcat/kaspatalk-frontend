@@ -1,6 +1,6 @@
 import styles from "./ChatBox.module.css";
 import {useContext, useEffect, useState} from "react";
-import { GeneralContextProvider } from "../contextProviders/GeneralContextProvider";
+import { GeneralContextProvider } from "../ContextProviders/GeneralContextProvider";
 import { toSvg } from "jdenticon";
 
 const ChatBox = (peerName) => {
@@ -9,12 +9,12 @@ const ChatBox = (peerName) => {
     const [ peerImage, setPeerImage] = useState();
         
     // Dynamically create peer image
-    useEffect(() => {
-        const imageFromPeerName = toSvg(peerName, 100);
+    const createProfileImage = (peerName) => {
+        const imageFromPeerName = toSvg(peerName.peerName, 100);
         const encodedSvg = encodeURIComponent(imageFromPeerName);
         const imageDataUrl = `data:image/svg+xml;charset=UTF-8,${encodedSvg}`;
         setPeerImage(imageDataUrl);
-    }, [])
+    }
     
     // Handle peer selection from chat list
     const handlePeerClick = (peerName) => {
@@ -26,13 +26,14 @@ const ChatBox = (peerName) => {
         let parts = completePeerName.peerName.split(':');
         let firstPart = parts[0];
         let secondPart = parts[1];
-        let start = secondPart.slice(0, 5);
+        let start = secondPart.slice(0, 6);
         let end = secondPart.slice(-6);
         setTrimmedPeerName(firstPart + ":" + start + "..." + end)
     }
     useEffect(() => {
         trimPeerName(peerName);
-    }, [])
+        createProfileImage(peerName);
+    }, [peerName])
 
 
     const chatBoxClass = selectedPeer == peerName.peerName ? `${styles.ChatBox} ${styles.ChatBoxSelected}` : styles.ChatBox;

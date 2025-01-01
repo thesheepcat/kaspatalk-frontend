@@ -1,7 +1,7 @@
 import SidePanel from './SidePanel/SidePanel.jsx'
 import MainWindow from './MainWindow/MainWindow.jsx'
 import styles from "./App.module.css"
-import { GeneralContextProvider } from './contextProviders/GeneralContextProvider.jsx'
+import { GeneralContextProvider } from './ContextProviders/GeneralContextProvider.jsx'
 import { useEffect, useState } from 'react'
 import { addressFromPrivateKey} from "../utils/conversions.js";
 import { USER_PRIVATE_KEY, NETWORK_ID} from "../../userSettings.js";

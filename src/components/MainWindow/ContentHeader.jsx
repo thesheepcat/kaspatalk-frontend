@@ -2,7 +2,7 @@ import styles from "./ContentHeader.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisV, faSearch } from '@fortawesome/free-solid-svg-icons';
 import {useContext, useEffect, useState} from "react";
-import { GeneralContextProvider} from "../contextProviders/GeneralContextProvider.jsx";
+import { GeneralContextProvider} from "../ContextProviders/GeneralContextProvider.jsx";
 import { toSvg } from "jdenticon";
 
 const ContentHeader = () => {

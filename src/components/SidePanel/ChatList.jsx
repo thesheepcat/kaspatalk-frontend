@@ -1,7 +1,7 @@
 import ChatBox from "./ChatBox";
 import styles from "./ChatList.module.css";
 import {useContext, useEffect} from "react";
-import { GeneralContextProvider } from "../contextProviders/GeneralContextProvider";
+import { GeneralContextProvider } from "../ContextProviders/GeneralContextProvider";
 
 const ChatList = () => {
     const { peers, updatePeers, userAddress }= useContext(GeneralContextProvider);

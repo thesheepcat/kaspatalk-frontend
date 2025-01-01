@@ -70,6 +70,21 @@
     cursor: pointer;
 }
 
+.sendButtonWhileSending {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border-color: transparent;
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
+    background-color: #ec524d;
+    color: #ffffff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
 .sendButtonIcon {
     width: 40%;
     height: 40%;

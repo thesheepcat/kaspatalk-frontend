@@ -3,7 +3,7 @@ import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { faPen } from "@fortawesome/free-solid-svg-icons/faPen"
 import styles from "./Header.module.css"
 import { useState, useRef, useContext } from "react"
-import { GeneralContextProvider} from "../contextProviders/GeneralContextProvider.jsx";
+import { GeneralContextProvider} from "../ContextProviders/GeneralContextProvider.jsx";
 import { sendTransaction } from "../../utils/sendTransaction.js";
 
 const Header = () => {
