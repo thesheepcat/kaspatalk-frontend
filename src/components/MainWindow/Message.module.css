@@ -28,7 +28,7 @@
     position: relative;
     margin-left: auto; 
     margin-right: 0;
-    background-color: #ffffff;
+    background-color: #eeeeee;
     border-radius: 1rem;
     width: fit-content;
     max-width: 300px;
@@ -46,7 +46,7 @@
     top: 0;
     right: -1rem;
     border: 1rem solid transparent;
-    border-top: 1rem solid #ffffff;
+    border-top: 1rem solid #eeeeee;
 }
 
 .messageText {

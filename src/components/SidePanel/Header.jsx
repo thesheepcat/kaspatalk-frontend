@@ -5,6 +5,7 @@ import styles from "./Header.module.css"
 import { useState, useRef, useContext } from "react"
 import { GeneralContextProvider} from "../ContextProviders/GeneralContextProvider.jsx";
 import { sendTransaction } from "../../utils/sendTransaction.js";
+import { encryptMessage } from "../../utils/e2ee.js";
 
 const Header = () => {
     const [newPeerAddress, setNewPeerAddress] = useState("");
@@ -27,7 +28,9 @@ const Header = () => {
 
     const handleSendTransactionButton = async (userPrivKey, networkIdentifier, newPeerAddress, messageArea) => {
         try {
-            await sendTransaction(userPrivKey, newPeerAddress, messageArea, networkIdentifier);
+            const [ encryptedMessage, ivHex ] = await encryptMessage(userPrivKey, messageArea, newPeerAddress);
+            const encryptedPayload = encryptedMessage + "|" + ivHex;
+            await sendTransaction(userPrivKey, newPeerAddress, encryptedPayload, networkIdentifier);
             closeModal();
         } catch (sendingTransactionError) {
             console.log("sendingTransactionError")

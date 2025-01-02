@@ -4,12 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceSmile, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { GeneralContextProvider} from "../ContextProviders/GeneralContextProvider.jsx";
 import { sendTransaction } from "../../utils/sendTransaction.js";
+import { encryptMessage } from "../../utils/e2ee.js";
 
 const SendMessageBox = () => {
-    const {selectedPeer, userPrivKey, networkIdentifier} = useContext(GeneralContextProvider);
+    const { selectedPeer, userPrivKey, networkIdentifier } = useContext(GeneralContextProvider);
     const [ messageText, setMessageText ] = useState("");
     const [ isSendingMessage, setIsSendingMessage ] = useState(false);
-
+    
     const handleMessageTextChange = (event) => {
         setMessageText(event.target.value)
     }
@@ -17,7 +18,9 @@ const SendMessageBox = () => {
     const handleSendMessageButton = async () => {
         try {
             setIsSendingMessage(true);
-            await sendTransaction(userPrivKey, selectedPeer, messageText, networkIdentifier);
+            const [ encryptedMessage, ivHex ] = await encryptMessage(userPrivKey, messageText, selectedPeer);
+            const encryptedPayload = encryptedMessage + "|" + ivHex;
+            await sendTransaction(userPrivKey, selectedPeer, encryptedPayload, networkIdentifier);
             setIsSendingMessage(false);
             setMessageText("");
         } catch (sendingTransactionError) {

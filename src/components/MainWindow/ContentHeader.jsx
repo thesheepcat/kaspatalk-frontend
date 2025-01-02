@@ -1,8 +1,8 @@
 import styles from "./ContentHeader.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisV, faSearch } from '@fortawesome/free-solid-svg-icons';
-import {useContext, useEffect, useState} from "react";
-import { GeneralContextProvider} from "../ContextProviders/GeneralContextProvider.jsx";
+import { useContext, useEffect, useState } from "react";
+import { GeneralContextProvider } from "../ContextProviders/GeneralContextProvider.jsx";
 import { toSvg } from "jdenticon";
 
 const ContentHeader = () => {
@@ -12,7 +12,7 @@ const ContentHeader = () => {
     // Dynamically create peer image
     useEffect(() => {
         const imageFromSelectedPeerName = toSvg(selectedPeer, 100);
-        console.log(imageFromSelectedPeerName);
+        //console.log(imageFromSelectedPeerName);
         const encodedSvg = encodeURIComponent(imageFromSelectedPeerName);
         const imageDataUrl = `data:image/svg+xml;charset=UTF-8,${encodedSvg}`;
         setPeerImage(imageDataUrl);

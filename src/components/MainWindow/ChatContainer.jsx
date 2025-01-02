@@ -38,7 +38,7 @@ const ChatContainer = () => {
     return(
         <div className={styles.chatContainer}>
             <div className={styles.messageList} ref={messageListRef}>
-                {messages.map((messageObj, i) => (<Message isReceivedMessage={(messageObj.receiver == userAddress) ? true : false} messageText={messageObj.message} timestamp={messageObj.block_time} key={i}/> ))}
+                {messages.map((messageObj, i) => (<Message isReceivedMessage={(messageObj.receiver == userAddress) ? true : false} encryptedPayload={messageObj.message} timestamp={messageObj.block_time} key={i}/> ))}
             </div>
         </div>
     )

@@ -18,6 +18,7 @@
 
 .startMessagingAlert {
     position: relative;
+    top: 15rem;
     align-self: center;
     background-color: #ffffff;
     border-radius: 1rem;
@@ -28,10 +29,9 @@
     box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
 }
 
-
 /*
 
- background: url("../assets/kaspa-icon-grren-white.svg");
+ background: url("../assets/kaspa-icon-green-white.svg");
     background-repeat: no-repeat;
     background-size: 800px;
     opacity: 0.4;
