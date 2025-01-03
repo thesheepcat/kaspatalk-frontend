@@ -11,5 +11,6 @@ export const GeneralContextProvider = createContext({
     updateUserPrivateKey: () => {},
     userPubKey: "",
     userAddress: "",
-    updateUserAddress: () => {}
+    updateUserAddress: () => {},
+    kaspaNodeWrpc: ""
 });

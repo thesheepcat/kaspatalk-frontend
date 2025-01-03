@@ -2,11 +2,12 @@ import { createTransactions, Resolver, RpcClient, PrivateKey, Address } from "..
 import load from "../kaspa-wasm32-sdk/web/kaspa/kaspa.js";
 import { Buffer } from 'buffer';
 
-export const sendTransaction = async (privateKey, peerAddress, userMessage, networkIdentifier) => {
+export const sendTransaction = async (privateKey, peerAddress, userMessage, networkIdentifier, kaspaNodeWrpc) => {    
     try {
         await load(); 
+        // resolver: new Resolver(),
         const rpc = new RpcClient({
-            resolver: new Resolver(),
+            url: kaspaNodeWrpc,
             networkId: networkIdentifier
         })
         await rpc.connect();
@@ -33,7 +34,7 @@ export const sendTransaction = async (privateKey, peerAddress, userMessage, netw
         for (const transaction of transactions) {
             transaction.sign([ privateKeyObject ])
             await transaction.submit(rpc)
-                console.log("Final transaction:")
+                //console.log("Final transaction:")
                 //console.log(transaction)
                 console.log("Fees:", transaction.feeAmount)
                 console.log("Message: " + userMessage)

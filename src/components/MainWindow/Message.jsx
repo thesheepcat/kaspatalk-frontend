@@ -16,7 +16,7 @@ const Message = ({isReceivedMessage, encryptedPayload, timestamp}) => {
         } catch (error) {
             console.log("Error while decrypting message: ", error);
         }
-    },[]);
+    },[encryptedPayload]);
 
     return (
         <div className={isReceivedMessage == true ? styles.receivedMessage : styles.sentMessage}>

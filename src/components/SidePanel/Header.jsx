@@ -10,7 +10,7 @@ import { encryptMessage } from "../../utils/e2ee.js";
 const Header = () => {
     const [newPeerAddress, setNewPeerAddress] = useState("");
     const [messageArea, setMessageArea] = useState("");
-    const {userPrivKey, networkIdentifier} = useContext(GeneralContextProvider);
+    const {userPrivKey, networkIdentifier, kaspaNodeWrpc} = useContext(GeneralContextProvider);
    
     const modalRef = useRef(null);
     const openModal = () => {
@@ -30,7 +30,7 @@ const Header = () => {
         try {
             const [ encryptedMessage, ivHex ] = await encryptMessage(userPrivKey, messageArea, newPeerAddress);
             const encryptedPayload = encryptedMessage + "|" + ivHex;
-            await sendTransaction(userPrivKey, newPeerAddress, encryptedPayload, networkIdentifier);
+            await sendTransaction(userPrivKey, newPeerAddress, encryptedPayload, networkIdentifier, kaspaNodeWrpc);
             closeModal();
         } catch (sendingTransactionError) {
             console.log("sendingTransactionError")

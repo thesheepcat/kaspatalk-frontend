@@ -7,7 +7,7 @@ import { sendTransaction } from "../../utils/sendTransaction.js";
 import { encryptMessage } from "../../utils/e2ee.js";
 
 const SendMessageBox = () => {
-    const { selectedPeer, userPrivKey, networkIdentifier } = useContext(GeneralContextProvider);
+    const { selectedPeer, userPrivKey, networkIdentifier, kaspaNodeWrpc } = useContext(GeneralContextProvider);
     const [ messageText, setMessageText ] = useState("");
     const [ isSendingMessage, setIsSendingMessage ] = useState(false);
     
@@ -20,7 +20,7 @@ const SendMessageBox = () => {
             setIsSendingMessage(true);
             const [ encryptedMessage, ivHex ] = await encryptMessage(userPrivKey, messageText, selectedPeer);
             const encryptedPayload = encryptedMessage + "|" + ivHex;
-            await sendTransaction(userPrivKey, selectedPeer, encryptedPayload, networkIdentifier);
+            await sendTransaction(userPrivKey, selectedPeer, encryptedPayload, networkIdentifier, kaspaNodeWrpc);
             setIsSendingMessage(false);
             setMessageText("");
         } catch (sendingTransactionError) {

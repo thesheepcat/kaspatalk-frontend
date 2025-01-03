@@ -11,7 +11,7 @@ const derivePublicKeyFromScriptPublicKey = (scriptPublicKey) => {
     const derivedPublicKey = scriptFromAddress.slice(2, -2);
     const formattedPublicKey = "02" + derivedPublicKey;
     //console.log("formattedPublicKey");
-    console.log(formattedPublicKey);
+    //console.log(formattedPublicKey);
     return formattedPublicKey;
 }
 
