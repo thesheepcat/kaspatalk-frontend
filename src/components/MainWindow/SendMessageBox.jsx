@@ -16,6 +16,10 @@ const SendMessageBox = () => {
     }
     
     const handleSendMessageButton = async () => {
+        if (!messageText.trim()) {
+            alert("Please enter a message")
+            return;
+        }
         try {
             setIsSendingMessage(true);
             const [ encryptedMessage, ivHex ] = await encryptMessage(userPrivKey, messageText, selectedPeer);
@@ -28,6 +32,12 @@ const SendMessageBox = () => {
             console.log(sendingTransactionError)
         }
     };
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            handleSendMessageButton();
+        }
+    }
 
     return(
         <div className={styles.messageBox}>
@@ -41,11 +51,14 @@ const SendMessageBox = () => {
                         value={messageText}
                         className={styles.messageInput}
                         onChange={handleMessageTextChange}
+                        onKeyDown={handleKeyDown}
                         />
                 </div>
                 <button 
                     className={isSendingMessage ? styles.sendButtonWhileSending : styles.sendButton}
-                    onClick={handleSendMessageButton}>
+                    onClick={handleSendMessageButton}
+
+                >
                     <FontAwesomeIcon icon={faPaperPlane} className={styles.sendButtonIcon}/>
                 </button>
         </div>

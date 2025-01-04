@@ -18,6 +18,10 @@ export const sendTransaction = async (privateKey, peerAddress, userMessage, netw
         const userAddressObject = privateKeyObject.toAddress(networkId);
         const peerAddressObject = new Address(peerAddress);
         const { entries } = await rpc.getUtxosByAddresses([ userAddressObject ])
+        if(!entries[0]) {
+            alert("No utxo entries found");
+            return;
+        }
         let selected_utxo = entries[0]
         const KASPATALK_PROTOCOL_PREFIX = "ktk:"
         let formattedUserMessage = KASPATALK_PROTOCOL_PREFIX + (userAddressObject.toString()) + "|" + userMessage

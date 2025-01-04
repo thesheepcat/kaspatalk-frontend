@@ -20,8 +20,11 @@ const Message = ({isReceivedMessage, encryptedPayload, timestamp}) => {
 
     return (
         <div className={isReceivedMessage == true ? styles.receivedMessage : styles.sentMessage}>
-            <span className={styles.messageText}>{decryptedMessage} </span>
-            <span className={styles.messageTime}>{timestamp}</span>
+                <span className={styles.messageText}>{decryptedMessage} </span>
+            <span className={styles.messageTime}>{new Date(timestamp).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+            })}</span>
         </div>
     )
 }
