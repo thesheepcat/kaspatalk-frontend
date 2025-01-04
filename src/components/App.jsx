@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import SidePanel from './SidePanel/SidePanel.jsx'
 import MainWindow from './MainWindow/MainWindow.jsx'
 import styles from "./App.module.css"
@@ -5,7 +6,6 @@ import { GeneralContextProvider } from './ContextProviders/GeneralContextProvide
 import { useEffect, useState } from 'react'
 import { addressFromPrivateKey} from "../utils/conversions.js";
 import { USER_PRIVATE_KEY, NETWORK_ID, KASPA_NODE_WRPC} from "../../userSettings.js";
-
  
 function App() {  
   const [networkIdentifier, setNetworkIdentifier] = useState(NETWORK_ID);
