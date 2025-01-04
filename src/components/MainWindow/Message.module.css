@@ -1,60 +1,44 @@
-
-.receivedMessage {
-    position: relative;
-    background-color: #ffffff;
+.receivedMessage, .sentMessage {
     border-radius: 1rem;
     width: fit-content;
-    max-width: 300px;
     padding: 0.5rem 1rem;
-    text-align: left;
-    margin-left: 0; 
-    margin-right: auto;
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
     display: flex;
     gap: 1rem;
-    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
-    overflow-wrap: break-word;
+    position: relative;
 }
-
-.receivedMessage::before {
+.receivedMessage {
+    background-color: #ffffff;
+}
+.sentMessage {
+    align-self: flex-end;
+    align-items: flex-end;
+    background-color: #eeeeee;
+}
+.receivedMessage::before, .sentMessage::before {
     content: "";
     position: absolute;
     top: 0;
-    left: -1rem;
     border: 1rem solid transparent;
+}
+.receivedMessage::before {
+    left: -1rem;
     border-top: 1rem solid #ffffff;
 }
-
-.sentMessage {
-    position: relative;
-    margin-left: auto; 
-    margin-right: 0;
-    background-color: #eeeeee;
-    border-radius: 1rem;
-    width: fit-content;
-    max-width: 300px;
-    padding: 0.5rem 1rem;
-    text-align: left;
-    display: flex;
-    gap: 1rem;
-    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
-    overflow-wrap: break-word;
-}
-
 .sentMessage::before {
-    content: "";
-    position: absolute;
-    top: 0;
     right: -1rem;
-    border: 1rem solid transparent;
     border-top: 1rem solid #eeeeee;
 }
-
 .messageText {
+    display: block;
     font-size: 1rem;
+    max-width: 200px;
+    overflow-wrap: break-word;
 }
-
 .messageTime {
-    font-size: 0.8rem;
-    margin-bottom: 0.2rem;
+    font-size: 0.7rem;
     color: #707579;
+    align-self: flex-end;
+    margin-bottom: -0.35rem;
+    margin-right: -0.3rem;
 }
