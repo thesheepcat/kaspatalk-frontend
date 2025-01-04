@@ -68,21 +68,43 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: transform 0.5s ease, background-color 0.5s ease;
 }
 
-.sendButtonWhileSending {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    border-color: transparent;
-    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.3);
-    background-color: #ec524d;
-    color: #ffffff;
-    font-size: 1rem;
+.sendButton:active {
+    transform: scale(0.85);
+    background-color: #4e867e;
+  }
+ 
+.isSendingMessageIconVisible {    
+    height: 2rem;
+    height: 2rem;
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    color: #707579;
+    opacity: .7;
+}
+
+.isSendingMessageIconHidden {
+    /* Initial visibility hidden for spinner */
+    visibility: hidden;
+}
+
+/* CSS for spinner rotation */
+.spinnerRotating {
+    animation: spin 3s linear infinite;
+}
+
+/* Keyframes for rotation animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .sendButtonIcon {
@@ -90,9 +112,8 @@
     height: 40%;
 }
 
-button:disabled,
-button[disabled]{
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
+button:disabled{
+    background-color: #cccccc;
+    color: #a5a5a5;
+    cursor: not-allowed;
 }

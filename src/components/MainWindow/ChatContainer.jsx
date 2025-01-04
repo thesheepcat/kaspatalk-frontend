@@ -11,21 +11,18 @@ const ChatContainer = () => {
     const [isScrolled, setIsScrolled] = useState(false);
 
     const handleWheel = () => {
-
-        console.log("Scrollato");
-
         const scrollTop = chatContainerRef.current.scrollTop;
         const scrollHeight = chatContainerRef.current.scrollHeight;
         const clientHeight = chatContainerRef.current.clientHeight;
         const scrollDistanceFromBottom = scrollHeight - clientHeight - scrollTop;
-        console.log(scrollDistanceFromBottom);
+        //console.log(scrollDistanceFromBottom);
         if(scrollDistanceFromBottom > 5){
             setIsScrolled(true);
-            console.log(isScrolled);
+            //console.log(isScrolled);
             return;
         }
         setIsScrolled(false);
-        console.log(isScrolled);
+        //console.log("isScrolled: ", isScrolled);
 
     }
     const fetchMessages = async () => {
@@ -60,35 +57,18 @@ const ChatContainer = () => {
         if(!isScrolled){
             messageListRef.current.scrollIntoView({behavior: "smooth", block: "end"});
         }
-
-
     }, [messages]);
 
     return(
         <div className={styles.chatContainer}
              ref={chatContainerRef}
              onWheel={handleWheel}>
-            <div id={"chatBox"}
-                 className={styles.messageList}
-                 ref={messageListRef}
-
-            >
+            <div id={"chatBox"} className={styles.messageList} ref={messageListRef}>
                 {messages.map((messageObj, i) => (<Message isReceivedMessage={(messageObj.receiver === userAddress) ? true : false} encryptedPayload={messageObj.message} timestamp={messageObj.block_time} key={i}/> ))}
             </div>
         </div>
     )
-
 }
 
 export default ChatContainer
-
-
-    /* #TODO
-    useEffect(() => {
-        // Scroll to the bottom after the component has mounted and items are added
-        if (messageListRef.current) {
-            messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
-            }
-    }, []);
-    */
 

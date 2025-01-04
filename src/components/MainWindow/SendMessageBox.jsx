@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import styles from "./SendMessageBox.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFaceSmile, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faFaceSmile, faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { GeneralContextProvider} from "../ContextProviders/GeneralContextProvider.jsx";
 import { sendTransaction } from "../../utils/sendTransaction.js";
 import { encryptMessage } from "../../utils/e2ee.js";
@@ -53,11 +53,15 @@ const SendMessageBox = () => {
                         onChange={handleMessageTextChange}
                         onKeyDown={handleKeyDown}
                         />
+                    <div className={isSendingMessage ? styles.isSendingMessageIconVisible : styles.isSendingMessageIconHidden}>
+                        <FontAwesomeIcon icon={faSpinner} className={isSendingMessage ? styles.spinnerRotating : ''}
+                        />
+                    </div>
                 </div>
                 <button 
-                    className={isSendingMessage ? styles.sendButtonWhileSending : styles.sendButton}
+                    className={styles.sendButton}
                     onClick={handleSendMessageButton}
-
+                    disabled={isSendingMessage}
                 >
                     <FontAwesomeIcon icon={faPaperPlane} className={styles.sendButtonIcon}/>
                 </button>
