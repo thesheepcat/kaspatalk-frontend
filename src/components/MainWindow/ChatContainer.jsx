@@ -5,29 +5,9 @@ import { GeneralContextProvider} from "../ContextProviders/GeneralContextProvide
 
 const ChatContainer = () => {
     const messageListRef = useRef(null);
-    const chatContainerRef = useRef(null);
     const {selectedPeer, userAddress} = useContext(GeneralContextProvider);
     const [ messages, setMessages ] = useState([]);
-    const [isScrolled, setIsScrolled] = useState(false);
 
-    const handleWheel = () => {
-
-        console.log("Scrollato");
-
-        const scrollTop = chatContainerRef.current.scrollTop;
-        const scrollHeight = chatContainerRef.current.scrollHeight;
-        const clientHeight = chatContainerRef.current.clientHeight;
-        const scrollDistanceFromBottom = scrollHeight - clientHeight - scrollTop;
-        console.log(scrollDistanceFromBottom);
-        if(scrollDistanceFromBottom > 5){
-            setIsScrolled(true);
-            console.log(isScrolled);
-            return;
-        }
-        setIsScrolled(false);
-        console.log(isScrolled);
-
-    }
     const fetchMessages = async () => {
         try {
             const messagesEndpoint = "/api/get-messages?address_1=" + selectedPeer + "&address_2=" + userAddress // #TODO
@@ -57,21 +37,16 @@ const ChatContainer = () => {
 
     //every time message changes it makes sure to scroll to the bottom
     useEffect(() => {
-        if(!isScrolled){
-            messageListRef.current.scrollIntoView({behavior: "smooth", block: "end"});
-        }
+        document.getElementById("chatBox").scrollIntoView({behavior: "smooth", block: "end"});
 
 
     }, [messages]);
 
     return(
-        <div className={styles.chatContainer}
-             ref={chatContainerRef}
-             onWheel={handleWheel}>
+        <div className={styles.chatContainer}>
             <div id={"chatBox"}
                  className={styles.messageList}
                  ref={messageListRef}
-
             >
                 {messages.map((messageObj, i) => (<Message isReceivedMessage={(messageObj.receiver === userAddress) ? true : false} encryptedPayload={messageObj.message} timestamp={messageObj.block_time} key={i}/> ))}
             </div>
