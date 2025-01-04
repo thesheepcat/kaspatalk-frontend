@@ -41,9 +41,6 @@ const Header = () => {
     return(
         <>
             <div className={styles.sidePanelHeader}>
-                <div className={styles.headerButton}>
-                    <FontAwesomeIcon icon={faBars} className={styles.headerButtonIcon} />
-                </div>
                 <div className={styles.searchBox}>
                     <FontAwesomeIcon icon={faSearch} className={styles.searchBoxIcon}/>
                     <input type="text" placeholder="Search" className={styles.searchBoxInput}></input>
