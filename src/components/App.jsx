@@ -6,6 +6,7 @@ import { GeneralContextProvider } from './ContextProviders/GeneralContextProvide
 import { useEffect, useState } from 'react'
 import { addressFromPrivateKey} from "../utils/conversions.js";
 import { USER_PRIVATE_KEY, NETWORK_ID, KASPA_NODE_WRPC} from "../../userSettings.js";
+import Test from './test/Test.jsx';
  
 function App() {  
   const [networkIdentifier, setNetworkIdentifier] = useState(NETWORK_ID);
@@ -58,6 +59,7 @@ function App() {
       <main className={styles.main}>
         <SidePanel />
         <MainWindow />
+        <Test/>
       </main>
     </GeneralContextProvider.Provider>
   )
