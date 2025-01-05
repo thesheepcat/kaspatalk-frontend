@@ -6,7 +6,7 @@ import { GeneralContextProvider } from './ContextProviders/GeneralContextProvide
 import { useEffect, useState } from 'react'
 import { addressFromPrivateKey} from "../utils/conversions.js";
 import { USER_PRIVATE_KEY, NETWORK_ID, KASPA_NODE_WRPC} from "../../userSettings.js";
-import Test from './test/Test.jsx';
+import MenuDrawer from './MenuDrawer/MenuDrawer.jsx';
  
 function App() {  
   const [networkIdentifier, setNetworkIdentifier] = useState(NETWORK_ID);
@@ -16,6 +16,7 @@ function App() {
   const [userPubkey, setUserPubkey] = useState("");
   const [userAddress, setUserAddress] = useState("");
   const [kaspaNodeWrpc, setKaspaNodeWrpc] = useState(KASPA_NODE_WRPC);
+  const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
   
   const updatePeers = (peers) => {
     setPeersList(peers);
@@ -34,6 +35,10 @@ function App() {
     setUserAddress(userAddress)
   }
   
+  const updateOpenMenuDrawer = (openDrawer) => {
+    setOpenMenuDrawer(openDrawer)
+  }
+
   const generalContextValue = {
     networkIdentifier: networkIdentifier,
     peers : peersList,
@@ -45,7 +50,9 @@ function App() {
     userPubKey: userPubkey,
     userAddress: userAddress,
     updateUserAddress: updateUserAddress,
-    kaspaNodeWrpc : kaspaNodeWrpc
+    kaspaNodeWrpc : kaspaNodeWrpc,
+    openMenuDrawer : openMenuDrawer,
+    updateOpenMenuDrawer : updateOpenMenuDrawer
     }
 
   useEffect(() => {
@@ -57,9 +64,9 @@ function App() {
   return (
     <GeneralContextProvider.Provider value={generalContextValue}>      
       <main className={styles.main}>
+        <MenuDrawer/>
         <SidePanel />
         <MainWindow />
-        <Test/>
       </main>
     </GeneralContextProvider.Provider>
   )
