@@ -10,6 +10,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { GeneralContextProvider} from "../ContextProviders/GeneralContextProvider.jsx";
 
 const MenuDrawer = () => {
@@ -19,10 +20,13 @@ const MenuDrawer = () => {
     updateOpenMenuDrawer(newOpen);
   };
 
+  const menuItems = ["User", "Contacts", "Settings"];
+  const logout = "Logout";
+
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {menuItems.map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -34,18 +38,14 @@ const MenuDrawer = () => {
         ))}
       </List>
       <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+      <ListItem key={logout} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <LogoutIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={logout} />
             </ListItemButton>
           </ListItem>
-        ))}
-      </List>
     </Box>
   );
 
