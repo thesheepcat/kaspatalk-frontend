@@ -12,5 +12,7 @@ export const GeneralContextProvider = createContext({
     userPubKey: "",
     userAddress: "",
     updateUserAddress: () => {},
-    kaspaNodeWrpc: ""
+    kaspaNodeWrpc: "",
+    openMenuDrawer : undefined,
+    updateOpenMenuDrawer : () => {}
 });

@@ -10,7 +10,7 @@ import { encryptMessage } from "../../utils/e2ee.js";
 const Header = () => {
     const [newPeerAddress, setNewPeerAddress] = useState("");
     const [messageArea, setMessageArea] = useState("");
-    const {userPrivKey, networkIdentifier, kaspaNodeWrpc} = useContext(GeneralContextProvider);
+    const {userPrivKey, networkIdentifier, kaspaNodeWrpc, updateOpenMenuDrawer} = useContext(GeneralContextProvider);
    
     const modalRef = useRef(null);
     const openModal = () => {
@@ -41,6 +41,10 @@ const Header = () => {
     return(
         <>
             <div className={styles.sidePanelHeader}>
+
+                <div className={styles.headerButton} onClick={() => updateOpenMenuDrawer(true)}>
+                    <FontAwesomeIcon icon={faBars} className={styles.headerButtonIcon} />
+                </div>
                 <div className={styles.searchBox}>
                     <FontAwesomeIcon icon={faSearch} className={styles.searchBoxIcon}/>
                     <input type="text" placeholder="Search" className={styles.searchBoxInput}></input>
@@ -91,3 +95,4 @@ const Header = () => {
 export default Header
 
 
+//<Button onClick={toggleDrawer(true)}>Open drawer</Button>
