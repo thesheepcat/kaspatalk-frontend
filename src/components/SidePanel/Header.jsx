@@ -41,6 +41,7 @@ const Header = () => {
     return(
         <>
             <div className={styles.sidePanelHeader}>
+
                 <div className={styles.headerButton} onClick={() => updateOpenMenuDrawer(true)}>
                     <FontAwesomeIcon icon={faBars} className={styles.headerButtonIcon} />
                 </div>
