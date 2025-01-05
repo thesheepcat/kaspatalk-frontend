@@ -1,4 +1,4 @@
-import { createTransactions, Resolver, RpcClient, PrivateKey, Address } from "../kaspa-wasm32-sdk/web/kaspa/kaspa.js";
+import { createTransactions, RpcClient, PrivateKey, Address } from "../kaspa-wasm32-sdk/web/kaspa/kaspa.js";
 import load from "../kaspa-wasm32-sdk/web/kaspa/kaspa.js";
 import { Buffer } from 'buffer';
 
