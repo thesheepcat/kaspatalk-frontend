@@ -3,7 +3,7 @@ import ChatContainer from "./ChatContainer.jsx";
 import ContentHeader from "./ContentHeader.jsx";
 import SendMessageBox from "./SendMessageBox.jsx";
 import {useContext} from "react";
-import { GeneralContextProvider} from "../ContextProviders/GeneralContextProvider.jsx";
+import { GeneralContextProvider} from "../../ContextProviders/GeneralContextProvider.jsx";
 
 
 const MainWindow = () => {

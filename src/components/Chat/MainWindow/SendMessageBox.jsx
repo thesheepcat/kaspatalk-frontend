@@ -2,9 +2,9 @@ import { useContext, useState } from "react";
 import styles from "./SendMessageBox.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceSmile, faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { GeneralContextProvider} from "../ContextProviders/GeneralContextProvider.jsx";
-import { sendTransaction } from "../../utils/sendTransaction.js";
-import { encryptMessage } from "../../utils/e2ee.js";
+import { GeneralContextProvider} from "../../ContextProviders/GeneralContextProvider.jsx";
+import { sendTransaction } from "../../../utils/sendTransaction.js";
+import { encryptMessage } from "../../../utils/e2ee.js";
 
 const SendMessageBox = () => {
     const { selectedPeer, userPrivKey, networkIdentifier, kaspaNodeWrpc } = useContext(GeneralContextProvider);
