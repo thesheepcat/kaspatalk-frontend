@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import SidePanel from './SidePanel/SidePanel.jsx'
 import MainWindow from './MainWindow/MainWindow.jsx'
 import styles from "./App.module.css"
