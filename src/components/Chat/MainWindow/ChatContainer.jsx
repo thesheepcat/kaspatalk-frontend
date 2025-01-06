@@ -1,7 +1,7 @@
 import styles from "./ChatContainer.module.css";
 import Message from "./Message.jsx";
 import {useRef, useEffect, useContext, useState} from "react";
-import { GeneralContextProvider} from "../ContextProviders/GeneralContextProvider.jsx";
+import { GeneralContextProvider} from "../../ContextProviders/GeneralContextProvider.jsx";
 
 const ChatContainer = () => {
     const messageListRef = useRef(null);

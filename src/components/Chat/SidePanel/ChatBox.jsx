@@ -1,6 +1,6 @@
 import styles from "./ChatBox.module.css";
 import {useContext, useEffect, useState} from "react";
-import { GeneralContextProvider } from "../ContextProviders/GeneralContextProvider";
+import { GeneralContextProvider } from "../../ContextProviders/GeneralContextProvider";
 import { toSvg } from "jdenticon";
 import {Box, useMediaQuery} from "@mui/material";
 

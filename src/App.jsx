@@ -1,11 +1,17 @@
-import SidePanel from './SidePanel/SidePanel.jsx'
-import MainWindow from './MainWindow/MainWindow.jsx'
+import HomeView from "./views/HomeView.jsx";
+import LoginView from "./views/LoginView.jsx";
+import ChatView from "./views/ChatView.jsx";
+import UserProfileView from "./views/UserProfileView.jsx";
+import ContactsView from "./views/ContactsView.jsx";
+import SettingsView from "./views/SettingsView.jsx";
+import LogoutView from "./views/LogoutView.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import styles from "./App.module.css"
-import { GeneralContextProvider } from './ContextProviders/GeneralContextProvider.jsx'
+import { GeneralContextProvider } from './components/ContextProviders/GeneralContextProvider.jsx'
 import { useEffect, useState } from 'react'
-import { addressFromPrivateKey} from "../utils/conversions.js";
-import { USER_PRIVATE_KEY, NETWORK_ID, KASPA_NODE_WRPC} from "../../userSettings.js";
-import MenuDrawer from './MenuDrawer/MenuDrawer.jsx';
+import { addressFromPrivateKey} from "./utils/conversions.js";
+import { USER_PRIVATE_KEY, NETWORK_ID, KASPA_NODE_WRPC} from "../userSettings.js";
+import AppLayout from "./views/AppLayout.jsx";
  
 function App() {  
   const [networkIdentifier, setNetworkIdentifier] = useState(NETWORK_ID);
@@ -52,22 +58,37 @@ function App() {
     kaspaNodeWrpc : kaspaNodeWrpc,
     openMenuDrawer : openMenuDrawer,
     updateOpenMenuDrawer : updateOpenMenuDrawer
-    }
+  }
 
   useEffect(() => {
     if (userPrivkey != undefined) {
       updateUserAddress(userPrivkey);
     }
   },[userPrivkey])
- 
+
+  // Create routing between all available views
+  const router = createBrowserRouter([
+    { path: "/", 
+      element: <AppLayout/>,
+      children: [
+        {path: "/", element: <HomeView/>},
+        {path: "/login", element: <LoginView/>},
+        {path: "/logout", element: <LogoutView/>},
+        {path: "/chat", element: <ChatView/>},
+        {path: "/user-profile", element: <UserProfileView/>},
+        {path: "/contacts", element: <ContactsView/>},    
+        {path: "/settings", element: <SettingsView/>}
+        
+      ]
+    }
+  ])
+
   return (
-    <GeneralContextProvider.Provider value={generalContextValue}>      
-      <main className={styles.main}>
-        <MenuDrawer/>
-        <SidePanel />
-        <MainWindow />
-      </main>
-    </GeneralContextProvider.Provider>
+      <GeneralContextProvider.Provider value={generalContextValue}>
+        <main className={styles.main}>
+            <RouterProvider router={router} />
+        </main>
+      </GeneralContextProvider.Provider>
   )
 }
 
