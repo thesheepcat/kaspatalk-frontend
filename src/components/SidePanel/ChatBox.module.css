@@ -16,49 +16,56 @@
 .ChatBoxSelected {
     background-color: hsl(170, 44%, 61%, 0.60);
 }
-
-.ChatImage {
-    width: 2rem;
-    height: 2rem;
-    flex-basis: 15%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .ChatImageImg {
     border-radius: 50%;
-    max-width: 100%;
+    max-width: 4rem;
     object-fit: cover;
 }
+@media (min-width: 1071px) {
 
-.ChatDetails {
-    flex-basis: 85%;
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-}
+    .ChatImage {
+        width: 2rem;
+        height: 2rem;
+        flex-basis: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-.ChatTitle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+    .ChatImageImg {
+        border-radius: 50%;
+        max-width: 2rem;
+        object-fit: cover;
+    }
 
-.ChatTitle h3 {
-    font-size: 1rem;
-    font-weight: 500;
-}
+    .ChatDetails {
+        flex-basis: 85%;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
 
-.ChatTitle span {
-    color: #707579;
-    font-size: 0.8rem;
-}
+    .ChatTitle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-.ChatMessage {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    .ChatTitle h3 {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .ChatTitle span {
+        color: #707579;
+        font-size: 0.8rem;
+    }
+
+    .ChatMessage {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 
 /*

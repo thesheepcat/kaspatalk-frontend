@@ -1,11 +1,11 @@
 .messageBox {
-    position:fixed;
     bottom:3rem;
     display: flex;
     align-self: center;
     align-items: center;
     gap: 2rem;
     height: fit-content;
+    margin-top: 1rem;
 }
 
 .emojiButton {
