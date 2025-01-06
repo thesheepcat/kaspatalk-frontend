@@ -2,6 +2,8 @@
 .BodyContainer {
     overflow-y: scroll;
     padding-right: 1rem;
+    display: flex;
+    justify-content: center;
 }
 
 ::-webkit-scrollbar {
