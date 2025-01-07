@@ -66,9 +66,9 @@ const SendMessageBox = () => {
 
     return(
         <Box className={"styles.messageBox"} sx={MessageBoxContainerBoxStyle}>
-                <Box className={"styles.messageContent"} sx={MessageContentContainerBoxStyle}>
-                    <Box className={"styles.emojiButton"} sx={EmojiButtonContainerBoxStyle}>
-                        <StyledFontAwesomeIcon icon={faFaceSmile} className={"styles.emojiButtonIcon"} sx={EmojiButtonIconContainerIconButtonStyle}/>
+                <Box  sx={MessageContentContainerBoxStyle}>
+                    <Box  sx={EmojiButtonContainerBoxStyle}>
+                        <StyledFontAwesomeIcon icon={faFaceSmile}  sx={EmojiButtonIconContainerIconButtonStyle}/>
                     </Box>
                     <textarea
                         style={{
@@ -89,7 +89,6 @@ const SendMessageBox = () => {
                         onKeyDown={handleKeyDown}
                     />
                     <IconButton
-                        className={"isSendingMessage ? styles.isSendingMessageIconVisible : styles.isSendingMessageIconHidden"}
                         sx={{...sendingMessageMarker(isSendingMessage)}}>
                         <FontAwesomeIcon
                             icon={faSpinner}
@@ -97,14 +96,12 @@ const SendMessageBox = () => {
                     </IconButton>
                 </Box>
                 <Button
-                    className={"styles.sendButton"}
                     sx={SendButtonContainerButtonStyle}
                     onClick={handleSendMessageButton}
                     disabled={isSendingMessage}
                 >
                         <StyledFontAwesomeIcon
                             icon={faPaperPlane}
-                            className={"styles.sendButtonIcon"}
                             sx={SendButtonIconContainerIconButtonStyle}/>
 
                 </Button>

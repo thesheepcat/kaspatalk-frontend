@@ -53,28 +53,27 @@ const Header = () => {
 
     return (
         <>
-            <Box className={"styles.sidePanelHeader"}
+            <Box
                  sx={SidePanelHeaderContainerBoxStyle}>
 
-                <Box className={"styles.headerButton"}
+                <Box
                      sx={HeaderButtonContainerBoxStyle}
                      onClick={() => updateOpenMenuDrawer(true)}>
 
                     <StyledFontAwesomeIcon icon={faBars}
-                                           className={"styles.headerButtonIcon"}
                                            sx={HeaderButtonContainerStyledFontAwesomeIconStyle}/>
                 </Box>
-                <Box className={"styles.searchBox"}
+                <Box
                      sx={SearchBoxContainerBoxStyle}>
                     <StyledFontAwesomeIcon icon={faSearch}
                                            className={"styles.searchBoxIcon"}
                                            sx={SearchBoxIconContainerStyledFontAwesomeIconStyle}/>
                     <Input type="text"
                            placeholder="Search"
-                           className={"styles.searchBoxInput"}
+
                            sx={SearchBoxInputContainerInputStyle}></Input>
                 </Box>
-                <Box className={"styles.headerButton"}
+                <Box
                      sx={HeaderButtonContainerBoxStyle}
                      onClick={openModalHandler}>
                     <StyledFontAwesomeIcon icon={faPen}
@@ -93,8 +92,8 @@ const Header = () => {
                         },
                     }}
                     sx={ModalContainerDialogStyle}>
-                <Box className={"styles.modalContent"} sx={ModalContentContainerBoxStyle}>
-                    <DialogTitle className={"styles.modalTitle"} sx={ModalTitleContainerDialogTitleStyle}>Start a new conversation</DialogTitle>
+                <Box  sx={ModalContentContainerBoxStyle}>
+                    <DialogTitle sx={ModalTitleContainerDialogTitleStyle}>Start a new conversation</DialogTitle>
                     <Box>
                         <label>New Peer Address:</label>
                         <Input
@@ -103,7 +102,6 @@ const Header = () => {
                             value={newPeerAddress}
                             onChange={(event) => setNewPeerAddress(event.target.value)}
                             placeholder="Enter new peer address"
-                            className={"styles.modalInput"}
                             sx={ModalInputContainerInputStyle}
                         />
                     </Box>
@@ -115,7 +113,6 @@ const Header = () => {
                             value={messageArea}
                             onChange={(event) => setMessageArea(event.target.value)}
                             placeholder="Write your message"
-                            className={"styles.modalTextArea"}
                             style={{
                                 width: '100%',
                                 padding: '10px',
@@ -126,15 +123,16 @@ const Header = () => {
 
                         />
                     </Box>
-                    <Box className={"styles.modalButtons"} sx={ModalButtonsContainerBoxStyle}>
+                    <Box sx={ModalButtonsContainerBoxStyle}>
                         <Button
                             onClick={() => handleSendTransactionButton(userPrivKey, networkIdentifier, newPeerAddress, messageArea)}
-                            className={"styles.sendButton"}
+
                             sx={SendButtonContainerButtonStyle}>
 
                             Send
                         </Button>
-                        <Button onClick={closeModalHandler} className={"styles.closeButton"} sx={CloseButtonContainerButtonStyle}>
+                        <Button onClick={closeModalHandler}
+                                sx={CloseButtonContainerButtonStyle}>
                             Cancel
                         </Button>
                     </Box>

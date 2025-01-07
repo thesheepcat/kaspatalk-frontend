@@ -56,15 +56,13 @@ const ChatBox = (peerName) => {
 
         <Box
             sx={{...ChatBoxContainerBoxStyle, ...chatBoxClass(selectedPeer)}}
-            className={"chatBoxClass"}
-
             onClick={() => {handlePeerClick(peerName.peerName)}}>
             {isSmallScreen ? (
                 //small screen visualization
                 <>
                     <Box>
                         <ImageListItem sx={ChatImageSmallScreenContainerImageListItemStyle}>
-                            <img className={"styles.ChatImageImg"} src={peerImage} alt=""/>
+                            <img  src={peerImage} alt=""/>
                         </ImageListItem>
 
                     </Box>
@@ -73,13 +71,13 @@ const ChatBox = (peerName) => {
 
                 //big screen configuration (same as before)
                 <>
-                    <Box className={"styles.ChatImage"} sx={ChatImageContainerBoxStyle}>
+                    <Box  sx={ChatImageContainerBoxStyle}>
                         <ImageListItem sx={ChatImageBigScreenContainerImageListItemStyle}>
-                                <img className={"styles.ChatImageImg"} src={peerImage} alt=""/>
+                                <img  src={peerImage} alt=""/>
                         </ImageListItem>
                     </Box>
-                    <Box className={"styles.ChatDetails"} sx={ChatDetailsContainerBoxStyle}>
-                     <Box className={"styles.ChatTitle"} sx={{...ChatTitleContainerBoxStyle,...BothH3TitleAndChatTileStyle}}>
+                    <Box  sx={ChatDetailsContainerBoxStyle}>
+                     <Box  sx={{...ChatTitleContainerBoxStyle,...BothH3TitleAndChatTileStyle}}>
                          <Typography variant="h3" sx={BothH3TitleAndChatTileStyle}>{trimmedPeerName}</Typography>
                      </Box>
                     </Box>

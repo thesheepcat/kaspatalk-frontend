@@ -14,14 +14,14 @@ const theme = createTheme({
       styleOverrides: {
         body: {
           '::-webkit-scrollbar': {
-            width: '0.5rem', // Larghezza della scrollbar
+            width: '0.5rem',
           },
           '::-webkit-scrollbar-track': {
-            background: 'transparent', // Pista trasparente
+            background: 'transparent',
           },
           '::-webkit-scrollbar-thumb': {
-            borderRadius: '1rem', // Angoli arrotondati della maniglia
-            backgroundColor: '#dbdada', // Colore della maniglia
+            borderRadius: '1rem',
+            backgroundColor: '#dbdada',
           },
 
         }
