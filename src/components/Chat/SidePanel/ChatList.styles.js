@@ -1,5 +1,7 @@
 export const ChatListContainerBoxStyle = {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    overflowX: "hidden",
+    overflowY: "hidden",
 
 }
