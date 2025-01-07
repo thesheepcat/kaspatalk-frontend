@@ -33,7 +33,7 @@ const ChatList = () => {
         };
       }}, [userAddress]);
     return(
-        <Box className={"styles.ChatList"} sx={ChatListContainerBoxStyle}>
+        <Box  sx={ChatListContainerBoxStyle}>
             {(peers.length > 0) ? peers.map((peer, i) => (<ChatBox key={i} peerName={peer}></ChatBox>)) : ""}
         </Box>
     );

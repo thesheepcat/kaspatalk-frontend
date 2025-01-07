@@ -39,15 +39,17 @@ const Message = ({isReceivedMessage, encryptedPayload, timestamp}) => {
                 }
             }>
                 <Typography component={"span"}
-                            className={"styles.messageText"}
                             sx={MessageTextContainerTypographyStyle}>
                     {decryptedMessage} </Typography>
+
             <Typography component={"span"}
-                        className={"styles.messageTime"}
-                        sx={MessageTimeContainerTypographyStyle}>{new Date(timestamp).toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit'
-            })}</Typography>
+                        sx={MessageTimeContainerTypographyStyle}>
+                {new Date(timestamp).toLocaleTimeString([],
+                    {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                    }
+            )}</Typography>
         </Box>
     )
 }

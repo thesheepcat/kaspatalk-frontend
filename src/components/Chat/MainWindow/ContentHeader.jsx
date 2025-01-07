@@ -30,9 +30,9 @@ const ContentHeader = () => {
     }, [selectedPeer])
 
     return(
-        <Box className={"styles.contentHeader"}
+        <Box
              sx={ContentHeaderContainerBoxStyle}>
-                <Box className={"image"}
+                <Box
                     sx={ImageContainerBoxStyle}>
                     <ImageListItem
                         sx={ImageContainerImageStyle}>
@@ -40,19 +40,19 @@ const ContentHeader = () => {
                     </ImageListItem>
 
                 </Box>
-                <Box className= {"styles.details"}
+                <Box
                     sx={DetailsContainerBoxStyle}>
                     <Typography component={"span"}
                                 sx={DetailsTitleContainerTypographyStyle}
-                                className={"styles.detailsTitle"}>{selectedPeer}</Typography>
+                    >{selectedPeer}</Typography>
                     <Typography component={"span"}
                                 sx={DetailsSpanContainerTypographyStyle}
-                                className={"styles.detailsSpan"}>last seen 10 minutes ago</Typography>
+                                >last seen 10 minutes ago</Typography>
                 </Box>
-                <Box className={"styles.icons"}
+                <Box
                      sx={IconsContainerBoxStyle}>
-                    <FontAwesomeIcon icon={faSearch} className={"styles.toggleButtonIcon"} />
-                    <FontAwesomeIcon icon={faEllipsisV} className={"styles.toggleButtonIcon"} />
+                    <FontAwesomeIcon icon={faSearch} />
+                    <FontAwesomeIcon icon={faEllipsisV}/>
                 </Box>
         </Box>
     )

@@ -2,7 +2,7 @@ import ChatContainer from "./ChatContainer.jsx";
 import ContentHeader from "./ContentHeader.jsx";
 import SendMessageBox from "./SendMessageBox.jsx";
 import {useContext} from "react";
-import { GeneralContextProvider} from "../../ContextProviders/GeneralContextProvider.jsx";
+import {GeneralContextProvider} from "../../ContextProviders/GeneralContextProvider.jsx";
 import Box from "@mui/material/Box";
 import {
     ContainerContainerBoxStyle,
@@ -13,16 +13,21 @@ import {
 
 const MainWindow = () => {
     const {selectedPeer} = useContext(GeneralContextProvider);
-    return(
-        <Box className={"styles.contentArea"} sx={ContentAreaContainerBoxStyle}>
-            <Box className={"styles.container"} sx={ContainerContainerBoxStyle}>
+    return (
+        <Box
+            sx={ContentAreaContainerBoxStyle}>
+            <Box
+                sx={ContainerContainerBoxStyle}>
                 {selectedPeer != "" ?
                     <>
-                    <ContentHeader />
-                    <ChatContainer />
-                    <SendMessageBox />   
+                        <ContentHeader/>
+                        <ChatContainer/>
+                        <SendMessageBox/>
                     </>
-                : <Box className={"styles.startMessagingAlert"} sx={StartMessagingAlertContainerBoxStyle}>Select a chat to start messaging</Box>
+                    : <Box
+                        sx={StartMessagingAlertContainerBoxStyle}>
+                        Select a chat to start messaging
+                    </Box>
                 }
             </Box>
         </Box>

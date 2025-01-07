@@ -4,7 +4,7 @@ import {BodyContainerContainerBoxStyle} from "./BodyContainer.styles.js";
 
 const BodyContainer = () => {
     return(
-        <Box className={"styles.BodyContainer"} sx={BodyContainerContainerBoxStyle}>
+        <Box sx={BodyContainerContainerBoxStyle}>
             <ChatList/>
         </Box>
     );

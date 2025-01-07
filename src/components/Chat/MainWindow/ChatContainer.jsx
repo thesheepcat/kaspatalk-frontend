@@ -19,14 +19,11 @@ const ChatContainer = () => {
         const scrollHeight = chatContainerRef.current.scrollHeight;
         const clientHeight = chatContainerRef.current.clientHeight;
         const scrollDistanceFromBottom = scrollHeight - clientHeight - scrollTop;
-        //console.log(scrollDistanceFromBottom);
         if(scrollDistanceFromBottom > 5){
             setIsScrolled(true);
-            //console.log(isScrolled);
             return;
         }
         setIsScrolled(false);
-        //console.log("isScrolled: ", isScrolled);
 
     }
     const fetchMessages = async () => {
@@ -71,12 +68,11 @@ const ChatContainer = () => {
         }, [isScrolled]);
 
     return(
-        <Box className={"chatContainer"}
+        <Box
              sx={ChatContainerBoxStyle}
              ref={chatContainerRef}
              onWheel={handleWheel}>
-            <Box id={"chatBox"}
-                 className={"messageList"}
+            <Box
                  sx={MessagListContainerStyle}
                  ref={messageListRef}>
                 {messages.map((messageObj, i) => (<Message isReceivedMessage={(messageObj.receiver === userAddress) ? true : false} encryptedPayload={messageObj.message} timestamp={messageObj.block_time} key={i}/> ))}
