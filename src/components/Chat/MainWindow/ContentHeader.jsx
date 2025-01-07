@@ -5,7 +5,6 @@ import { useContext, useEffect, useState } from "react";
 import { GeneralContextProvider } from "../../ContextProviders/GeneralContextProvider.jsx";
 import { toSvg } from "jdenticon";
 import Box from "@mui/material/Box";
-import {Image} from "@mui/icons-material";
 import {ImageListItem, Typography} from "@mui/material";
 import {
     ContentHeaderContainerBoxStyle,

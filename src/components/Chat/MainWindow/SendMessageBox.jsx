@@ -1,16 +1,35 @@
 import { useContext, useState } from "react";
-import styles from "./SendMessageBox.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceSmile, faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { GeneralContextProvider} from "../../ContextProviders/GeneralContextProvider.jsx";
 import { sendTransaction } from "../../../utils/sendTransaction.js";
 import { encryptMessage } from "../../../utils/e2ee.js";
+import Box from "@mui/material/Box";
+import {Button, IconButton, styled} from "@mui/material";
+import { keyframes } from '@emotion/react';
+import {
+    EmojiButtonContainerBoxStyle,
+    EmojiButtonIconContainerIconButtonStyle,
+    IsSendingMessageIconHiddenContainerIconButtonStyle,
+    IsSendingMessageIconVisibleContainerIconButtonStyle,
+    MessageBoxContainerBoxStyle,
+    MessageContentContainerBoxStyle,
+    SendButtonContainerButtonStyle, SendButtonIconContainerIconButtonStyle
+} from "./SendMessageBox.styles.js";
+import theme from "../../../index.theme.js";
 
 const SendMessageBox = () => {
     const { selectedPeer, userPrivKey, networkIdentifier, kaspaNodeWrpc } = useContext(GeneralContextProvider);
     const [ messageText, setMessageText ] = useState("");
     const [ isSendingMessage, setIsSendingMessage ] = useState(false);
-    
+    const spin = keyframes`
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+        `;
+
+    const StyledFontAwesomeIcon = styled(FontAwesomeIcon)({theme})
+
+
     const handleMessageTextChange = (event) => {
         setMessageText(event.target.value)
     }
@@ -38,34 +57,58 @@ const SendMessageBox = () => {
             handleSendMessageButton();
         }
     }
+    const sendingMessageMarker=(isSendingMessage)=> {
+        if (isSendingMessage) {
+            return IsSendingMessageIconVisibleContainerIconButtonStyle;
+        }
+        return IsSendingMessageIconHiddenContainerIconButtonStyle
+    }
 
     return(
-        <div className={styles.messageBox}>
-                <div className={styles.messageContent}>
-                    <div className={styles.emojiButton}>
-                        <FontAwesomeIcon icon={faFaceSmile} className={styles.emojiButtonIcon} />  
-                    </div>
-                    <textarea 
-                        type="text" 
+        <Box className={"styles.messageBox"} sx={MessageBoxContainerBoxStyle}>
+                <Box className={"styles.messageContent"} sx={MessageContentContainerBoxStyle}>
+                    <Box className={"styles.emojiButton"} sx={EmojiButtonContainerBoxStyle}>
+                        <StyledFontAwesomeIcon icon={faFaceSmile} className={"styles.emojiButtonIcon"} sx={EmojiButtonIconContainerIconButtonStyle}/>
+                    </Box>
+                    <textarea
+                        style={{
+                            height: '2rem',
+                            fontSize: '1.2rem',
+                            width: '100%',
+                            padding: '0.5rem',
+                            outline: 'none',
+                            border: 'none',
+                            fontFamily: 'system-ui',
+                            overflowWrap: 'break-word',
+                            resize: 'none',
+                            overflow: 'hidden'
+                        }}
                         placeholder="Write your message here..."
                         value={messageText}
-                        className={styles.messageInput}
                         onChange={handleMessageTextChange}
                         onKeyDown={handleKeyDown}
-                        />
-                    <div className={isSendingMessage ? styles.isSendingMessageIconVisible : styles.isSendingMessageIconHidden}>
-                        <FontAwesomeIcon icon={faSpinner} className={isSendingMessage ? styles.spinnerRotating : ''}
-                        />
-                    </div>
-                </div>
-                <button 
-                    className={styles.sendButton}
+                    />
+                    <IconButton
+                        className={"isSendingMessage ? styles.isSendingMessageIconVisible : styles.isSendingMessageIconHidden"}
+                        sx={{...sendingMessageMarker(isSendingMessage)}}>
+                        <FontAwesomeIcon
+                            icon={faSpinner}
+                            style={{animation: isSendingMessage ? {spin}+' 1s linear infinite' : ''}}/>
+                    </IconButton>
+                </Box>
+                <Button
+                    className={"styles.sendButton"}
+                    sx={SendButtonContainerButtonStyle}
                     onClick={handleSendMessageButton}
                     disabled={isSendingMessage}
                 >
-                    <FontAwesomeIcon icon={faPaperPlane} className={styles.sendButtonIcon}/>
-                </button>
-        </div>
+                        <StyledFontAwesomeIcon
+                            icon={faPaperPlane}
+                            className={"styles.sendButtonIcon"}
+                            sx={SendButtonIconContainerIconButtonStyle}/>
+
+                </Button>
+        </Box>
     )
 }
 
