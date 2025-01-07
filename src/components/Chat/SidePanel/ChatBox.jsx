@@ -2,7 +2,17 @@ import styles from "./ChatBox.module.css";
 import {useContext, useEffect, useState} from "react";
 import { GeneralContextProvider } from "../../ContextProviders/GeneralContextProvider";
 import { toSvg } from "jdenticon";
-import {Box, useMediaQuery} from "@mui/material";
+import {Box, ImageListItem, Typography, useMediaQuery} from "@mui/material";
+import {ImageContainerImageStyle} from "../MainWindow/ContentHeader.styles.js";
+import {
+    BothH3TitleAndChatTileStyle,
+    ChatBoxContainerBoxStyle,
+    ChatDetailsContainerBoxStyle,
+    ChatImageBigScreenContainerImageListItemStyle,
+    ChatImageContainerBoxStyle,
+    ChatImageSmallScreenContainerImageListItemStyle, ChatTitleContainerBoxStyle,
+    SelectedChatBoxContainerBoxStyle
+} from "./ChatBox.styles.js";
 
 
 const ChatBox = (peerName) => {
@@ -39,44 +49,42 @@ const ChatBox = (peerName) => {
     }, [peerName])
 
 
-    const chatBoxClass = selectedPeer == peerName.peerName ? `${styles.ChatBox} ${styles.ChatBoxSelected}` : styles.ChatBox;
+    const chatBoxClass =(selectedPeer) => {
+        if(selectedPeer === peerName.peerName){
+            return SelectedChatBoxContainerBoxStyle
+        }
+    }
     return(
-        // <div className={chatBoxClass} onClick={() => {handlePeerClick(peerName.peerName)}}>
-        //                 <div className={styles.ChatImage}>
-        //                     <img className={styles.ChatImageImg} src={peerImage} alt=""/>
-        //                 </div>
-        //                 <div className={styles.ChatDetails}>
-        //                     <div className={styles.ChatTitle}>
-        //                         <h3>{trimmedPeerName}</h3>
-        //                     </div>
-        //                 </div>
-        //             </div>
+
         <Box
-            sx={{
-                display: "flex", justifyContent: "space-between", alignItems: "center"}}
-            className={chatBoxClass}
+            sx={{...ChatBoxContainerBoxStyle, ...chatBoxClass(selectedPeer)}}
+            className={"chatBoxClass"}
 
             onClick={() => {handlePeerClick(peerName.peerName)}}>
             {isSmallScreen ? (
                 //small screen visualization
                 <>
-
                     <Box>
-                        <img className={styles.ChatImageImg} src={peerImage} alt=""/>
+                        <ImageListItem sx={ChatImageSmallScreenContainerImageListItemStyle}>
+                            <img className={"styles.ChatImageImg"} src={peerImage} alt=""/>
+                        </ImageListItem>
+
                     </Box>
                 </>
             ) : (
 
                 //big screen configuration (same as before)
                 <>
-                    <div className={styles.ChatImage}>
-                     <img className={styles.ChatImageImg} src={peerImage} alt=""/>
-                    </div>
-                    <div className={styles.ChatDetails}>
-                     <div className={styles.ChatTitle}>
-                         <h3>{trimmedPeerName}</h3>
-                     </div>
-                    </div>
+                    <Box className={styles.ChatImage} sx={ChatImageContainerBoxStyle}>
+                        <ImageListItem sx={ChatImageBigScreenContainerImageListItemStyle}>
+                                <img className={"styles.ChatImageImg"} src={peerImage} alt=""/>
+                        </ImageListItem>
+                    </Box>
+                    <Box className={"styles.ChatDetails"} sx={ChatDetailsContainerBoxStyle}>
+                     <Box className={"styles.ChatTitle"} sx={{...ChatTitleContainerBoxStyle,...BothH3TitleAndChatTileStyle}}>
+                         <Typography variant="h3" sx={BothH3TitleAndChatTileStyle}>{trimmedPeerName}</Typography>
+                     </Box>
+                    </Box>
                 </>
             )}
         </Box>
