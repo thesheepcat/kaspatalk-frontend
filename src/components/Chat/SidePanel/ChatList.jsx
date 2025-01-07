@@ -1,7 +1,8 @@
 import ChatBox from "./ChatBox";
-import styles from "./ChatList.module.css";
 import {useContext, useEffect} from "react";
 import { GeneralContextProvider } from "../../ContextProviders/GeneralContextProvider";
+import Box from "@mui/material/Box";
+import {ChatListContainerBoxStyle} from "./ChatList.styles.js";
 
 const ChatList = () => {
     const { peers, updatePeers, userAddress }= useContext(GeneralContextProvider);
@@ -32,9 +33,9 @@ const ChatList = () => {
         };
       }}, [userAddress]);
     return(
-        <div className={styles.ChatList}>
+        <Box className={"styles.ChatList"} sx={ChatListContainerBoxStyle}>
             {(peers.length > 0) ? peers.map((peer, i) => (<ChatBox key={i} peerName={peer}></ChatBox>)) : ""}
-        </div>
+        </Box>
     );
 }
 
