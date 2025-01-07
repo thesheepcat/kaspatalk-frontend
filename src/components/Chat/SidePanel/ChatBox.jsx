@@ -1,9 +1,7 @@
-import styles from "./ChatBox.module.css";
 import {useContext, useEffect, useState} from "react";
 import { GeneralContextProvider } from "../../ContextProviders/GeneralContextProvider";
 import { toSvg } from "jdenticon";
 import {Box, ImageListItem, Typography, useMediaQuery} from "@mui/material";
-import {ImageContainerImageStyle} from "../MainWindow/ContentHeader.styles.js";
 import {
     BothH3TitleAndChatTileStyle,
     ChatBoxContainerBoxStyle,
@@ -75,7 +73,7 @@ const ChatBox = (peerName) => {
 
                 //big screen configuration (same as before)
                 <>
-                    <Box className={styles.ChatImage} sx={ChatImageContainerBoxStyle}>
+                    <Box className={"styles.ChatImage"} sx={ChatImageContainerBoxStyle}>
                         <ImageListItem sx={ChatImageBigScreenContainerImageListItemStyle}>
                                 <img className={"styles.ChatImageImg"} src={peerImage} alt=""/>
                         </ImageListItem>
