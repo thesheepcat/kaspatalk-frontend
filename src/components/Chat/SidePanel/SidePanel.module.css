@@ -1,8 +1,0 @@
-.sidePanel {
-    min-width: 24rem;
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffff;
-    border-right: .1rem solid #dfe1e5;
-    box-shadow: 0 .1rem .1rem .1rem rgba(0 0 0 / .05);   
-}
