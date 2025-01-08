@@ -58,14 +58,14 @@ export const SearchBoxInputContainerInputStyle = {
 
 }
 export const ModalContainerDialogStyle = {
-    width: 'fit-content',
+    width: '100vw',
+    height: '100vh',
     position: 'fixed',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     zIndex: 1300,
-    backgroundColor: 'transparent',
-    backdropFilter: 'transparent',
+
 }
 export const ModalContentContainerBoxStyle = {
     padding: '40px',
@@ -73,7 +73,7 @@ export const ModalContentContainerBoxStyle = {
 }
 export const ModalTitleContainerDialogTitleStyle = {
     position: 'relative',
-    alignSelf: 'center',
+    textAlign: 'center',
     color: 'black',
 }
 export const ModalInputContainerInputStyle = {
@@ -89,7 +89,7 @@ export const ModalButtonsContainerBoxStyle = {
     gap: '10px',
 }
 export const SendButtonContainerButtonStyle = {
-    padding: '10px 20px',
+    padding: '5px 10px',
     cursor: 'pointer',
     border: 'none',
     borderRadius: '4px',
@@ -98,7 +98,7 @@ export const SendButtonContainerButtonStyle = {
     '&:hover': {
         backgroundColor: '#45a049',
     },
-    width: '150px',
+    width: '70px',
 }
 export const CloseButtonContainerButtonStyle = {
     padding: '10px 20px',
@@ -110,5 +110,5 @@ export const CloseButtonContainerButtonStyle = {
     '&:hover': {
         backgroundColor: '#e53935',
     },
-    width: '150px'
+    width: '70px'
 }

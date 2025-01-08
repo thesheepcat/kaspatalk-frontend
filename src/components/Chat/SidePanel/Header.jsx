@@ -1,6 +1,6 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBars, faSearch, faPen} from '@fortawesome/free-solid-svg-icons'
-import {useState, useContext} from "react"
+import {useState, useContext, useRef} from "react"
 import {GeneralContextProvider} from "../../ContextProviders/GeneralContextProvider.jsx"
 import {sendTransaction} from "../../../utils/sendTransaction.js";
 import {encryptMessage} from "../../../utils/e2ee.js";
@@ -21,6 +21,7 @@ import {
 } from "./Header.styles.js";
 
 const Header = () => {
+    const modalRef = useRef(null);
     const [newPeerAddress, setNewPeerAddress] = useState("");
     const [messageArea, setMessageArea] = useState("");
     const [openModal, setOpenModal] = useState(false);
@@ -50,6 +51,7 @@ const Header = () => {
             console.log(sendingTransactionError)
         }
     };
+
 
     return (
         <>
@@ -87,12 +89,12 @@ const Header = () => {
                     slotProps={{
                         backdrop: {
                             sx: {
-                                backgroundColor: 'rgba(0, 0, 0, 0)',
+                                backgroundColor: 'rgba(0, 0, 0, 0.25)',
                             },
                         },
                     }}
                     sx={ModalContainerDialogStyle}>
-                <Box  sx={ModalContentContainerBoxStyle}>
+                <Box  sx={ModalContentContainerBoxStyle} ref={modalRef}>
                     <DialogTitle sx={ModalTitleContainerDialogTitleStyle}>Start a new conversation</DialogTitle>
                     <Box>
                         <label>New Peer Address:</label>
@@ -123,7 +125,7 @@ const Header = () => {
 
                         />
                     </Box>
-                    <Box sx={ModalButtonsContainerBoxStyle}>
+                    <Box sx={ModalButtonsContainerBoxStyle} >
                         <Button
                             onClick={() => handleSendTransactionButton(userPrivKey, networkIdentifier, newPeerAddress, messageArea)}
 
