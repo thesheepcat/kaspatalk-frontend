@@ -1,9 +1,10 @@
 export const BodyContainerContainerBoxStyle = {
 
-    overflowY: 'scroll',
+    overflowY: 'hidden',
     paddingRight: '1rem',
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+
 
 
 }

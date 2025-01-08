@@ -1,7 +1,9 @@
 export const ContentAreaContainerBoxStyle = {
     position: 'relative',
-    width: '100%',
-    height: '98vh',
+    width: '96vw',
+    height: '97vh',
+    overflowY: 'hidden',
+    overflowX: 'hidden',
 }
 export const ContainerContainerBoxStyle = {
     position: 'relative',

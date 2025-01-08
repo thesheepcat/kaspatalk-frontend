@@ -4,5 +4,6 @@ export const SidePanelContainerBoxStyle = {
         sm: 250,
         md: 300,
     },
-    minWidth: 150
+    minWidth: 150,
+
 }
