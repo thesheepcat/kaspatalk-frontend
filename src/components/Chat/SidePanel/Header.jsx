@@ -3,14 +3,14 @@ import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { faPen } from "@fortawesome/free-solid-svg-icons/faPen"
 import styles from "./Header.module.css"
 import { useState, useRef, useContext } from "react"
-import { GeneralContextProvider} from "../../ContextProviders/GeneralContextProvider.jsx";
+import { GeneralContext} from "../../ContextProviders/GeneralContextProvider.jsx";
 import { sendTransaction } from "../../../utils/sendTransaction.js";
 import { encryptMessage } from "../../../utils/e2ee.js";
 
 const Header = () => {
     const [newPeerAddress, setNewPeerAddress] = useState("");
     const [messageArea, setMessageArea] = useState("");
-    const {userPrivKey, networkIdentifier, kaspaNodeWrpc, updateOpenMenuDrawer} = useContext(GeneralContextProvider);
+    const {userPrivKey, networkIdentifier, kaspaNodeWrpc, setOpenMenuDrawer} = useContext(GeneralContext);
    
     const modalRef = useRef(null);
     const openModal = () => {
@@ -42,7 +42,7 @@ const Header = () => {
         <>
             <div className={styles.sidePanelHeader}>
 
-                <div className={styles.headerButton} onClick={() => updateOpenMenuDrawer(true)}>
+                <div className={styles.headerButton} onClick={() => setOpenMenuDrawer(true)}>
                     <FontAwesomeIcon icon={faBars} className={styles.headerButtonIcon} />
                 </div>
                 <div className={styles.searchBox}>

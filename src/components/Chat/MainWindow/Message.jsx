@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import styles from "./Message.module.css"
 import { useState, useEffect, useContext } from "react"; 
 import { decryptMessage } from "../../../utils/e2ee.js";
-import { GeneralContextProvider } from "../../ContextProviders/GeneralContextProvider.jsx";
+import { GeneralContext } from "../../ContextProviders/GeneralContextProvider.jsx";
 
 const Message = ({isReceivedMessage, encryptedPayload, timestamp}) => {
-    const { userPrivKey, selectedPeer } = useContext(GeneralContextProvider); 
+    const { userPrivKey, selectedPeer } = useContext(GeneralContext); 
     const [ decryptedMessage, setDecryptedMessage ] = useState();
 
     // Decrypt message

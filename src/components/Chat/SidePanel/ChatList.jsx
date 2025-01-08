@@ -1,10 +1,10 @@
 import ChatBox from "./ChatBox";
 import styles from "./ChatList.module.css";
 import {useContext, useEffect} from "react";
-import { GeneralContextProvider } from "../../ContextProviders/GeneralContextProvider";
+import { GeneralContext } from "../../ContextProviders/GeneralContextProvider";
 
 const ChatList = () => {
-    const { peers, updatePeers, userAddress }= useContext(GeneralContextProvider);
+    const { peersList, setPeersList, userAddress }= useContext(GeneralContext);
 
     const fetchPeers = async () => {
         try {
@@ -15,7 +15,7 @@ const ChatList = () => {
             throw new Error('Failed to fetch peers');
           } 
           const fetchedPeers = await response.json();
-          updatePeers(fetchedPeers);
+          setPeersList(fetchedPeers);
         } catch (responseError) {
             console.log(responseError)
         }
@@ -33,7 +33,7 @@ const ChatList = () => {
       }}, [userAddress]);
     return(
         <div className={styles.ChatList}>
-            {(peers.length > 0) ? peers.map((peer, i) => (<ChatBox key={i} peerName={peer}></ChatBox>)) : ""}
+            {(peersList.length > 0) ? peersList.map((peer, i) => (<ChatBox key={i} peerName={peer}></ChatBox>)) : ""}
         </div>
     );
 }

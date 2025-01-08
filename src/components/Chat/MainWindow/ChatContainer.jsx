@@ -1,12 +1,12 @@
 import styles from "./ChatContainer.module.css";
 import Message from "./Message.jsx";
 import {useRef, useEffect, useContext, useState} from "react";
-import { GeneralContextProvider} from "../../ContextProviders/GeneralContextProvider.jsx";
+import { GeneralContext} from "../../ContextProviders/GeneralContextProvider.jsx";
 
 const ChatContainer = () => {
     const messageListRef = useRef(null);
     const chatContainerRef = useRef(null);
-    const {selectedPeer, userAddress} = useContext(GeneralContextProvider);
+    const {selectedPeer, userAddress} = useContext(GeneralContext);
     const [ messages, setMessages ] = useState([]);
     const [isScrolled, setIsScrolled] = useState(false);
 
