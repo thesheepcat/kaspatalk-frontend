@@ -27,6 +27,14 @@ export const AddressContainerTypographyStyle = {
     textAlign: "left",
 
 };
+export const ButtonContainerBoxStyle = {
+    display: "flex",
+    gap: 1,
+    alignSelf: "center",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+}
 
 export const ActionContainerTypographyStyle = {
     textAlign: "center",

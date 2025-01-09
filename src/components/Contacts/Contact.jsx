@@ -5,7 +5,7 @@ import {
     BothActionsContainerButtonStyle, CancelButtonContainerButtonStyle, ConfirmButtonContainerButtonStyle,
     ListItemShellContainerBoxStyle,
 } from "./Contact.styles.js";
-import {AddressContainerTypographyStyle} from "./ContactList.styles.js";
+import {AddressContainerTypographyStyle, ButtonContainerBoxStyle} from "./ContactList.styles.js";
 import {
     CloseButtonContainerButtonStyle,
     ModalButtonsContainerBoxStyle,
@@ -97,12 +97,7 @@ const Contact = ({ name, address}) => {
             >
                 {currentAddress}
             </Typography>
-            <Box sx={{    display: "flex",
-                gap: 1,
-                alignSelf: "center",
-                width: "100%",
-                justifyContent: "center",
-                alignItems: "center",  }}>
+            <Box sx={ButtonContainerBoxStyle}>
 
                 <Button onClick={openModalHandler}
                         sx={{ ...BothActionsContainerButtonStyle, ...ConfirmButtonContainerButtonStyle }}
