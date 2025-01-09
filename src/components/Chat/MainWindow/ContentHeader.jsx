@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { GeneralContextProvider } from "../../ContextProviders/GeneralContextProvider.jsx";
 import { toSvg } from "jdenticon";
 import Box from "@mui/material/Box";
-import {ImageListItem, Typography} from "@mui/material";
+import {Button, Dialog, DialogTitle, IconButton, ImageListItem, Input, Typography} from "@mui/material";
 import {
     ContentHeaderContainerBoxStyle,
     DetailsContainerBoxStyle,
@@ -15,10 +15,19 @@ import {
     ImageContainerBoxStyle,
     ImageContainerImageStyle
 } from "./ContentHeader.styles.js";
+import {
+    CloseButtonContainerButtonStyle,
+    ModalButtonsContainerBoxStyle,
+    ModalContainerDialogStyle,
+    ModalContentContainerBoxStyle, ModalInputContainerInputStyle,
+    ModalTitleContainerDialogTitleStyle, SendButtonContainerButtonStyle
+} from "../SidePanel/Header.styles.js";
 
 const ContentHeader = () => {
     const { selectedPeer } = useContext(GeneralContextProvider);
     const [ peerImage, setPeerImage] = useState();
+    const [openModal, setOpenModal] = useState(false);
+    const [newAlias, setNewAlias] = useState("");
     
     // Dynamically create peer image
     useEffect(() => {
@@ -29,7 +38,45 @@ const ContentHeader = () => {
         setPeerImage(imageDataUrl);
     }, [selectedPeer])
 
+
+    const openModalHandler = () => {
+        setOpenModal(true);
+    };
+    const closeModalHandler = () => {
+        setOpenModal(false);
+        setNewAlias("");
+
+    };
+    const saveAliasHandler = () => {
+        if (newAlias) {
+            try{
+                localStorage.setItem(selectedPeer, newAlias);
+                console.log(`Alias salvato: ${newAlias}`);
+                setNewAlias("");
+
+
+            }
+            catch(error) {
+                console.error(error);
+            }
+        }
+        else {
+            alert("Alias can't be empty")
+        }
+        closeModalHandler();
+    }
+    const checkifAlias = () => {
+        return localStorage.getItem(selectedPeer) !== null;
+    };
+    const retrieveAliasHandler = () => {
+        if(checkifAlias()){
+            return localStorage.getItem(selectedPeer)
+        }
+        return selectedPeer
+    }
+
     return(
+        <>
         <Box
              sx={ContentHeaderContainerBoxStyle}>
                 <Box
@@ -44,7 +91,7 @@ const ContentHeader = () => {
                     sx={DetailsContainerBoxStyle}>
                     <Typography component={"span"}
                                 sx={DetailsTitleContainerTypographyStyle}
-                    >{selectedPeer}</Typography>
+                    >{retrieveAliasHandler()}</Typography>
                     <Typography component={"span"}
                                 sx={DetailsSpanContainerTypographyStyle}
                                 >last seen 10 minutes ago</Typography>
@@ -52,9 +99,65 @@ const ContentHeader = () => {
                 <Box
                      sx={IconsContainerBoxStyle}>
                     <FontAwesomeIcon icon={faSearch} />
-                    <FontAwesomeIcon icon={faEllipsisV}/>
+                    <IconButton onClick={openModalHandler}>
+                        <FontAwesomeIcon icon={faEllipsisV}/>
+                    </IconButton>
                 </Box>
         </Box>
+            <Dialog open={openModal}
+                    onClose={closeModalHandler}
+                    slotProps={{
+                        backdrop: {
+                            sx: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.25)',
+                            },
+                        },
+
+                    }}
+
+                    sx={ModalContainerDialogStyle}>
+                <Box  sx={ModalContentContainerBoxStyle} >
+                    <DialogTitle sx={ModalTitleContainerDialogTitleStyle}>Save Address</DialogTitle>
+
+                    <Box>
+                        <label>Address</label>
+                        <Input
+                            type="text"
+                            value={selectedPeer}
+                            disabled={true}
+                            sx={ModalInputContainerInputStyle}
+                            disableUnderline={true}
+                        />
+                    </Box>
+                    <Box>
+                        <label>New Alias:</label>
+                        <Input
+                            type="text"
+                            id="newAlias"
+                            value={newAlias}
+                            onChange={(event) => setNewAlias(event.target.value)}
+                            placeholder="Enter Alias for the address"
+                            sx={ModalInputContainerInputStyle}
+                            disableUnderline={true}
+                        />
+                    </Box>
+
+                    <Box sx={ModalButtonsContainerBoxStyle} >
+                        <Button
+                            onClick={() => {saveAliasHandler()}}
+
+                            sx={SendButtonContainerButtonStyle}>
+
+                            Save
+                        </Button>
+                        <Button onClick={closeModalHandler}
+                                sx={CloseButtonContainerButtonStyle}>
+                            Cancel
+                        </Button>
+                    </Box>
+                </Box>
+            </Dialog>
+        </>
     )
 }
 

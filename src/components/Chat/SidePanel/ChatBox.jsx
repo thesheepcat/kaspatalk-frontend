@@ -34,16 +34,26 @@ const ChatBox = (peerName) => {
 
     const trimPeerName = (completePeerName) => {
         // Split the string at the colon to separate the part before and after
-        let parts = completePeerName.peerName.split(':');
-        let firstPart = parts[0];
-        let secondPart = parts[1];
-        let start = secondPart.slice(0, 6);
-        let end = secondPart.slice(-6);
-        setTrimmedPeerName(firstPart + ":" + start + "..." + end)
+        if (localStorage.getItem(peerName.peerName.toString()) !== null){
+            let name = localStorage.getItem(peerName.peerName.toString())
+            setTrimmedPeerName(name)
+        }
+        else {
+            let parts = completePeerName.peerName.split(':');
+            let firstPart = parts[0];
+            let secondPart = parts[1];
+            let start = secondPart.slice(0, 6);
+            let end = secondPart.slice(-6);
+            setTrimmedPeerName(firstPart + ":" + start + "..." + end)
+        }
+
+
+
     }
     useEffect(() => {
         trimPeerName(peerName);
         createProfileImage(peerName);
+
     }, [peerName])
 
 
@@ -52,6 +62,9 @@ const ChatBox = (peerName) => {
             return SelectedChatBoxContainerBoxStyle
         }
     }
+
+
+
     return(
 
         <Box
