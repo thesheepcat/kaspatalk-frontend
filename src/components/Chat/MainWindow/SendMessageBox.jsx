@@ -5,7 +5,7 @@ import { GeneralContextProvider} from "../../ContextProviders/GeneralContextProv
 import { sendTransaction } from "../../../utils/sendTransaction.js";
 import { encryptMessage } from "../../../utils/e2ee.js";
 import Box from "@mui/material/Box";
-import {Button, IconButton, styled} from "@mui/material";
+import {Button, IconButton, Input, styled} from "@mui/material";
 import { keyframes } from '@emotion/react';
 import {
     EmojiButtonContainerBoxStyle,
@@ -13,7 +13,7 @@ import {
     IsSendingMessageIconHiddenContainerIconButtonStyle,
     IsSendingMessageIconVisibleContainerIconButtonStyle,
     MessageBoxContainerBoxStyle,
-    MessageContentContainerBoxStyle,
+    MessageContentContainerBoxStyle, MessageInputContainerTextAreaAutosizeStyle,
     SendButtonContainerButtonStyle, SendButtonIconContainerIconButtonStyle
 } from "./SendMessageBox.styles.js";
 import theme from "../../../index.theme.js";
@@ -70,26 +70,20 @@ const SendMessageBox = () => {
                     <Box  sx={EmojiButtonContainerBoxStyle}>
                         <StyledFontAwesomeIcon icon={faFaceSmile}  sx={EmojiButtonIconContainerIconButtonStyle}/>
                     </Box>
-                    <textarea
-                        style={{
-                            height: '2rem',
-                            fontSize: '1.2rem',
-                            width: '100%',
-                            padding: '0.5rem',
-                            outline: 'none',
-                            border: 'none',
-                            fontFamily: 'system-ui',
-                            overflowWrap: 'break-word',
-                            resize: 'none',
-                            overflow: 'hidden'
-                        }}
+                    <Input type={"text"}
+                        sx={MessageInputContainerTextAreaAutosizeStyle}
                         placeholder="Write your message here..."
                         value={messageText}
+                       disableUnderline={true}
                         onChange={handleMessageTextChange}
                         onKeyDown={handleKeyDown}
+                       margin="dense"
+                       multiline
+                       maxRows={3}
+
                     />
                     <IconButton
-                        sx={{...sendingMessageMarker(isSendingMessage)}}>
+                        sx={{...sendingMessageMarker(isSendingMessage), flexAlign: 'flex-end' }}>
                         <FontAwesomeIcon
                             icon={faSpinner}
                             style={{animation: isSendingMessage ? {spin}+' 1s linear infinite' : ''}}/>
