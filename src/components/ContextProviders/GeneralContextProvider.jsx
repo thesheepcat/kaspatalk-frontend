@@ -19,8 +19,12 @@ const GeneralContextProvider = ({children}) => {
       setOpenMenuDrawer
     }
 
+    const loadKaspaWasm = async () => {
+        await loadKaspaSDK();
+    }
+
     useEffect(() => {
-        loadKaspaSDK();
+        loadKaspaWasm();
     }, [])
 
     return(
