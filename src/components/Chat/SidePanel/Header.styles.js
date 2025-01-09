@@ -65,10 +65,14 @@ export const ModalContainerDialogStyle = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     zIndex: 1300,
+    '& .MuiPaper-root': {
+        width: '70%',
+        maxWidth: '80ch',
 
-}
+}}
 export const ModalContentContainerBoxStyle = {
     padding: '40px',
+
 
 }
 export const ModalTitleContainerDialogTitleStyle = {
