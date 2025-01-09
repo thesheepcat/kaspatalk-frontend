@@ -92,7 +92,9 @@ const Header = () => {
                                 backgroundColor: 'rgba(0, 0, 0, 0.25)',
                             },
                         },
+
                     }}
+
                     sx={ModalContainerDialogStyle}>
                 <Box  sx={ModalContentContainerBoxStyle} ref={modalRef}>
                     <DialogTitle sx={ModalTitleContainerDialogTitleStyle}>Start a new conversation</DialogTitle>
@@ -105,6 +107,7 @@ const Header = () => {
                             onChange={(event) => setNewPeerAddress(event.target.value)}
                             placeholder="Enter new peer address"
                             sx={ModalInputContainerInputStyle}
+                            disableUnderline={true}
                         />
                     </Box>
                     <Box>
@@ -115,13 +118,8 @@ const Header = () => {
                             value={messageArea}
                             onChange={(event) => setMessageArea(event.target.value)}
                             placeholder="Write your message"
-                            style={{
-                                width: '100%',
-                                padding: '10px',
-                                marginBottom: '15px',
-                                border: '1px solid #ccc',
-                                borderRadius: '4px',
-                            }}
+                            disableUnderline={true}
+                            sx={ModalInputContainerInputStyle}
 
                         />
                     </Box>

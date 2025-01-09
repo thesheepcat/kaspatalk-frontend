@@ -4,6 +4,7 @@ export const ChatBoxContainerBoxStyle = {
     alignItems: "center",
     gap: '1rem',
     width: '100%',
+
     minHeight: '4rem',
     cursor: 'pointer',
     transition: 'all .3s ease',
@@ -24,8 +25,6 @@ export const ChatImageSmallScreenContainerImageListItemStyle = {
     objectFit: 'cover'
 }
 export const ChatImageContainerBoxStyle = {
-    width: '2rem',
-    height: '2rem',
     flexBasis: '15%',
     display: 'flex',
     alignItems: 'center',
@@ -33,7 +32,7 @@ export const ChatImageContainerBoxStyle = {
 }
 export const ChatImageBigScreenContainerImageListItemStyle = {
     borderRadius: '50%',
-    maxWidth: '2rem',
+    width: '3rem',
     objectFit: 'cover'
 }
 export const ChatDetailsContainerBoxStyle = {

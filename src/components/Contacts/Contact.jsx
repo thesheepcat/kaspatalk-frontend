@@ -1,42 +1,26 @@
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsisV, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { useContext, useEffect, useState } from "react";
-import { GeneralContextProvider } from "../../ContextProviders/GeneralContextProvider.jsx";
-import { toSvg } from "jdenticon";
+import ListItem from "@mui/material/ListItem";
 import Box from "@mui/material/Box";
-import {Button, Dialog, DialogTitle, IconButton, ImageListItem, Input, Typography} from "@mui/material";
+import {Button, Dialog, DialogTitle, Input, Typography} from "@mui/material";
 import {
-    ContentHeaderContainerBoxStyle,
-    DetailsContainerBoxStyle,
-    DetailsSpanContainerTypographyStyle,
-    DetailsTitleContainerTypographyStyle,
-    IconsContainerBoxStyle,
-    ImageContainerBoxStyle,
-    ImageContainerImageStyle
-} from "./ContentHeader.styles.js";
+    BothActionsContainerButtonStyle, CancelButtonContainerButtonStyle, ConfirmButtonContainerButtonStyle,
+    ListItemShellContainerBoxStyle,
+} from "./Contact.styles.js";
+import {AddressContainerTypographyStyle, ButtonContainerBoxStyle} from "./ContactList.styles.js";
 import {
     CloseButtonContainerButtonStyle,
     ModalButtonsContainerBoxStyle,
     ModalContainerDialogStyle,
     ModalContentContainerBoxStyle, ModalInputContainerInputStyle,
     ModalTitleContainerDialogTitleStyle, SendButtonContainerButtonStyle
-} from "../SidePanel/Header.styles.js";
+} from "../Chat/SidePanel/Header.styles.js";
+import { useState} from "react";
 
-const ContentHeader = () => {
-    const { selectedPeer } = useContext(GeneralContextProvider);
-    const [ peerImage, setPeerImage] = useState();
+const Contact = ({ name, address}) => {
     const [openModal, setOpenModal] = useState(false);
     const [newAlias, setNewAlias] = useState("");
-    
-    // Dynamically create peer image
-    useEffect(() => {
-        const imageFromSelectedPeerName = toSvg(selectedPeer, 100);
-        //console.log(imageFromSelectedPeerName);
-        const encodedSvg = encodeURIComponent(imageFromSelectedPeerName);
-        const imageDataUrl = `data:image/svg+xml;charset=UTF-8,${encodedSvg}`;
-        setPeerImage(imageDataUrl);
-    }, [selectedPeer])
+    const [currentName, setCurrentName] = useState(name);
+    const [currentAddress] = useState(address);
+
 
 
     const openModalHandler = () => {
@@ -52,13 +36,14 @@ const ContentHeader = () => {
             try {
                 let contacts = JSON.parse(localStorage.getItem("Contacts"));
                 if (contacts) {
-                    contacts[selectedPeer] = newAlias;
+                    contacts[address] = newAlias;
                 } else {
-                    contacts = { [selectedPeer]: newAlias };
+                    contacts = { [address]: newAlias };
                 }
 
                 localStorage.setItem('Contacts', JSON.stringify(contacts));
 
+                setCurrentName(newAlias)
                 setNewAlias("");
 
             } catch (error) {
@@ -71,50 +56,65 @@ const ContentHeader = () => {
 
         closeModalHandler();
     }
-    const checkifAlias = () => {
-        if (localStorage.getItem("Contacts") !== null){
 
-            let contacts = JSON.parse(localStorage.getItem("Contacts"));
+     const removeAliasHandler = () => {
+         const confirmation = window.confirm("Sei sicuro di voler rimuovere questo contatto?");
+         if (confirmation) {
 
-            if (contacts[selectedPeer] !== null && contacts[selectedPeer] !== "" && contacts[selectedPeer] !== undefined){
-                return contacts[selectedPeer]
-            }
+             let contacts = JSON.parse(localStorage.getItem("Contacts"));
 
+
+
+             if (!contacts) {
+                 console.log("Nessun contatto salvato.");
+                 return;
+             }
+
+
+             if (contacts[address]) {
+                 delete contacts[currentAddress];
+                 localStorage.setItem("Contacts", JSON.stringify(contacts));
+                 console.log(`Contatto con l'indirizzo ${address} rimosso.`);
+                 window.location.reload();
+             } else {
+                 console.log(`L'indirizzo ${address} non esiste.`);
+             }
         }
-        return selectedPeer
+    }
 
-    };
-
-
-    return(
+    return (
         <>
-        <Box
-             sx={ContentHeaderContainerBoxStyle}>
-                <Box
-                    sx={ImageContainerBoxStyle}>
-                    <ImageListItem
-                        sx={ImageContainerImageStyle}>
-                        <img src={peerImage} alt="peerImage" />
-                    </ImageListItem>
+        <ListItem sx={ListItemShellContainerBoxStyle}>
+            <Typography component="span" >
+                {currentName}
+            </Typography>
+            <Typography
+                component="span"
+                sx={{
+                    ...AddressContainerTypographyStyle,
+                    justifyContent: "flex-start",
+                }}
+            >
+                {currentAddress}
+            </Typography>
+            <Box sx={ButtonContainerBoxStyle}>
 
-                </Box>
-                <Box
-                    sx={DetailsContainerBoxStyle}>
-                    <Typography component={"span"}
-                                sx={DetailsTitleContainerTypographyStyle}
-                    >{checkifAlias()}</Typography>
-                    <Typography component={"span"}
-                                sx={DetailsSpanContainerTypographyStyle}
-                                >last seen 10 minutes ago</Typography>
-                </Box>
-                <Box
-                     sx={IconsContainerBoxStyle}>
-                    <FontAwesomeIcon icon={faSearch} />
-                    <IconButton onClick={openModalHandler}>
-                        <FontAwesomeIcon icon={faEllipsisV}/>
-                    </IconButton>
-                </Box>
-        </Box>
+                <Button onClick={openModalHandler}
+                        sx={{ ...BothActionsContainerButtonStyle, ...ConfirmButtonContainerButtonStyle }}
+                        variant="outlined"
+                        size="small">
+                    Edit
+                </Button>
+                <Button sx={{ ...BothActionsContainerButtonStyle, ...CancelButtonContainerButtonStyle }}
+                        onClick={removeAliasHandler}
+                        variant="outlined"
+                        size="small"
+                        color="error">
+                    Delete
+                </Button>
+            </Box>
+        </ListItem>
+
             <Dialog open={openModal}
                     onClose={closeModalHandler}
                     slotProps={{
@@ -134,7 +134,7 @@ const ContentHeader = () => {
                         <label>Address</label>
                         <Input
                             type="text"
-                            value={selectedPeer}
+                            value={address}
                             disabled={true}
                             sx={ModalInputContainerInputStyle}
                             disableUnderline={true}
@@ -169,7 +169,7 @@ const ContentHeader = () => {
                 </Box>
             </Dialog>
         </>
-    )
-}
+    );
+};
 
-export default ContentHeader
+export default Contact;

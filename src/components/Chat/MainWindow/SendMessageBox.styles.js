@@ -8,6 +8,7 @@ export const MessageBoxContainerBoxStyle = {
     gap: '2rem',
     height: 'fit-content',
     marginTop: '1rem',
+
 }
 export const MessageContentContainerBoxStyle = {
     position: 'relative',
@@ -19,16 +20,19 @@ export const MessageContentContainerBoxStyle = {
     gap: '1rem',
     height: 'fit-content',
     boxShadow: '1px 1px 5px 0px rgba(0, 0, 0, 0.3)',
-    minWidth: '30rem',
+
+
+
 }
 export const EmojiButtonContainerBoxStyle = {
 
     borderRadius: '50%',
     backgroundColor: '#ffffff',
     fontSize: '1.5rem',
+    paddingLeft: '0.5rem',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     cursor: 'pointer',
 }
 export const EmojiButtonIconContainerIconButtonStyle = {
@@ -36,14 +40,21 @@ export const EmojiButtonIconContainerIconButtonStyle = {
     opacity: 0.7,
 }
 export const MessageInputContainerTextAreaAutosizeStyle = {
-    backgroundColor: '#000000',
+    minWidth: '250px',
+    width: '30vw',
+    minHeight: '2.5rem',
+    height: 'fit-content',
+    overflow: 'auto',
     fontSize: '1.2rem',
     padding: '0.5rem',
     outline: 'none',
     border: 'none',
     fontFamily: 'system-ui',
-    overflowWrap: 'break-word',
-    overflow: 'hidden',
+    boxSizing: 'border-box',
+    resize: 'none',
+    flexGrow: 1,
+    textAlign: 'top',
+
 
 }
 export const IsSendingMessageIconVisibleContainerIconButtonStyle = {
