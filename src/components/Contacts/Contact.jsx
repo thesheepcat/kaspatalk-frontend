@@ -15,7 +15,7 @@ import {
 } from "../Chat/SidePanel/Header.styles.js";
 import { useState} from "react";
 
-const Contact = ({ name, address }) => {
+const Contact = ({ name, address}) => {
     const [openModal, setOpenModal] = useState(false);
     const [newAlias, setNewAlias] = useState("");
     const [currentName, setCurrentName] = useState(name);
@@ -57,6 +57,30 @@ const Contact = ({ name, address }) => {
         closeModalHandler();
     }
 
+     const removeAliasHandler = () => {
+         const confirmation = window.confirm("Sei sicuro di voler rimuovere questo contatto?");
+         if (confirmation) {
+
+             let contacts = JSON.parse(localStorage.getItem("Contacts"));
+
+
+
+             if (!contacts) {
+                 console.log("Nessun contatto salvato.");
+                 return;
+             }
+
+
+             if (contacts[address]) {
+                 delete contacts[currentAddress];
+                 localStorage.setItem("Contacts", JSON.stringify(contacts));
+                 console.log(`Contatto con l'indirizzo ${address} rimosso.`);
+                 window.location.reload();
+             } else {
+                 console.log(`L'indirizzo ${address} non esiste.`);
+             }
+        }
+    }
 
     return (
         <>
@@ -87,6 +111,7 @@ const Contact = ({ name, address }) => {
                     Edit
                 </Button>
                 <Button sx={{ ...BothActionsContainerButtonStyle, ...CancelButtonContainerButtonStyle }}
+                        onClick={removeAliasHandler}
                         variant="outlined"
                         size="small"
                         color="error">

@@ -10,9 +10,11 @@ import {
     ActionContainerTypographyStyle,
     ContactContainerListStyle
 } from "./ContactList.styles.js";
+import {useState} from "react";
 
 const ContactList = () => {
-    const contacts = JSON.parse(localStorage.getItem("Contacts")) || {};
+    const [contacts, setContacts] = useState(JSON.parse(localStorage.getItem("Contacts")) || {});
+
 
     return (
         <Box sx={ShellContainerBoxStyle}>
