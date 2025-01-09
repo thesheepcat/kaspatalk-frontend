@@ -3,11 +3,12 @@ import Box from "@mui/material/Box";
 import Contact from "./Contact.jsx";
 import { Typography } from "@mui/material";
 import {
-    ActionContainerTypographyStyle,
-    AddressContainerTypographyStyle, ContactContainerListStyle,
     ShellContainerBoxStyle,
     TableHeaderContainerBoxStyle,
-    TypographyContainerSpanStyle
+    TypographyContainerSpanStyle,
+    AddressContainerTypographyStyle,
+    ActionContainerTypographyStyle,
+    ContactContainerListStyle
 } from "./ContactList.styles.js";
 
 const ContactList = () => {
@@ -17,21 +18,19 @@ const ContactList = () => {
         <Box sx={ShellContainerBoxStyle}>
             <Box sx={TableHeaderContainerBoxStyle}>
                 <Typography sx={TypographyContainerSpanStyle} component="span">
-                    Name:
+                    Name
                 </Typography>
                 <Typography
                     sx={{ ...TypographyContainerSpanStyle, ...AddressContainerTypographyStyle }}
                     component="span"
                 >
-                    Address:
+                    Address
                 </Typography>
                 <Typography sx={{...TypographyContainerSpanStyle, ...ActionContainerTypographyStyle}} component="span">
-                    Actions:
+                    Actions
                 </Typography>
             </Box>
-            <List
-                sx={ContactContainerListStyle}
-            >
+            <List sx={ContactContainerListStyle}>
                 {Object.entries(contacts).map(([address, name]) => (
                     <Contact key={address} name={name} address={address} />
                 ))}

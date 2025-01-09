@@ -6,35 +6,37 @@ export const ShellContainerBoxStyle = {
 };
 
 export const TableHeaderContainerBoxStyle = {
-    display: "flex",
-    justifyContent: "space-between",
+    display: "grid",
+    gridTemplateColumns: "1fr 2fr 1fr",
+    gap: "16px",
+    marginBottom: 2,
+    fontWeight: "bold",
+    padding: "0 8px",
     width: "100%",
     maxWidth: "70rem",
-    gap: 2,
-    marginBottom: 2,
+    backgroundColor: "#f4f4f4"
 };
 
 export const TypographyContainerSpanStyle = {
     display: "inline-block",
-    flex: "1 0 auto",
     textAlign: "left",
 };
 
 export const AddressContainerTypographyStyle = {
     ...TypographyContainerSpanStyle,
-    justifyContent: "flex-start",
-    textAlign: "center",
+    textAlign: "left",
+
 };
+
 export const ActionContainerTypographyStyle = {
     textAlign: "center",
-    marginLeft: '11rem',
-}
+
+};
+
 export const ContactContainerListStyle = {
-    width: "100%",
-    maxWidth: "70rem",
     display: "flex",
     flexDirection: "column",
-    gap: 2,
-
-
-}
+    gap: "16px",
+    width: "100%",
+    maxWidth: "70rem",
+    marginTop: "8px", }

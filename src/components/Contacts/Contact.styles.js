@@ -1,21 +1,13 @@
 export const ListItemShellContainerBoxStyle = {
-    display: "flex",
-    justifyContent: "space-between",
+    display: "grid",
+    gridTemplateColumns: "1fr 2fr 1fr",
+    gap: "16px",
     width: "100%",
-    maxWidth: "70rem",
+    padding: "8px",
     border: "1px solid grey",
-    borderRadius: 5,
-};
-export const TypographyContainerSpanStyle = {
-    display: "inline-block",
-    flex: "1 0 auto",
-    textAlign: "left",
+    borderRadius: "5px",
 };
 
-export const AddressContainerTypographyStyle = {
-    ...TypographyContainerSpanStyle,
-    justifyContent: "flex-start",
-};
 
 export const BothActionsContainerButtonStyle = {
     display: 'flex',
@@ -34,7 +26,7 @@ export const ConfirmButtonContainerButtonStyle = {
     width: '70px',
 }
 export const CancelButtonContainerButtonStyle = {
-    padding: '10px 20px',
+    padding: '5px 10px',
     cursor: 'pointer',
     border: 'none',
     borderRadius: '4px',

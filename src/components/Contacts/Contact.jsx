@@ -2,17 +2,15 @@ import ListItem from "@mui/material/ListItem";
 import Box from "@mui/material/Box";
 import { Button, Typography } from "@mui/material";
 import {
-    AddressContainerTypographyStyle,
     BothActionsContainerButtonStyle, CancelButtonContainerButtonStyle, ConfirmButtonContainerButtonStyle,
-    ListItemShellContainerBoxStyle
+    ListItemShellContainerBoxStyle,
 } from "./Contact.styles.js";
-
-
+import {AddressContainerTypographyStyle} from "./ContactList.styles.js";
 
 const Contact = ({ name, address }) => {
     return (
         <ListItem sx={ListItemShellContainerBoxStyle}>
-            <Typography component="span" sx={{ flex: "1 0 auto", textAlign: "left" }}>
+            <Typography component="span" >
                 {name}
             </Typography>
             <Typography
@@ -24,14 +22,17 @@ const Contact = ({ name, address }) => {
             >
                 {address}
             </Typography>
-            <Box sx={{ display: "flex", gap: 1 }}>
-                {/* Puoi aggiungere qui i bottoni per le azioni */}
-                <Button sx={{ ...BothActionsContainerButtonStyle,
-                    ...ConfirmButtonContainerButtonStyle}} variant="outlined" size="small">
+            <Box sx={{    display: "flex",
+                gap: 1,
+                alignSelf: "center",
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",  }}>
+
+                <Button sx={{ ...BothActionsContainerButtonStyle, ...ConfirmButtonContainerButtonStyle }} variant="outlined" size="small">
                     Edit
                 </Button>
-                <Button sx={{ ...BothActionsContainerButtonStyle,
-                    ...CancelButtonContainerButtonStyle}}  variant="outlined" size="small" color="error">
+                <Button sx={{ ...BothActionsContainerButtonStyle, ...CancelButtonContainerButtonStyle }} variant="outlined" size="small" color="error">
                     Delete
                 </Button>
             </Box>
