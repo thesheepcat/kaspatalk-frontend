@@ -49,31 +49,42 @@ const ContentHeader = () => {
     };
     const saveAliasHandler = () => {
         if (newAlias) {
-            try{
-                localStorage.setItem(selectedPeer, newAlias);
-                console.log(`Alias salvato: ${newAlias}`);
+            try {
+                let contacts = JSON.parse(localStorage.getItem("Contacts"));
+                if (contacts) {
+                    contacts[selectedPeer] = newAlias;
+                } else {
+                    contacts = { [selectedPeer]: newAlias };
+                }
+
+                localStorage.setItem('Contacts', JSON.stringify(contacts));
+
                 setNewAlias("");
 
+            } catch (error) {
+                console.error("Errore durante il salvataggio dei contatti:", error);
+            }
+        } else {
+            alert("Alias can't be empty");
+        }
 
-            }
-            catch(error) {
-                console.error(error);
-            }
-        }
-        else {
-            alert("Alias can't be empty")
-        }
+
         closeModalHandler();
     }
     const checkifAlias = () => {
-        return localStorage.getItem(selectedPeer) !== null;
-    };
-    const retrieveAliasHandler = () => {
-        if(checkifAlias()){
-            return localStorage.getItem(selectedPeer)
+        if (localStorage.getItem("Contacts") !== null){
+
+            let contacts = JSON.parse(localStorage.getItem("Contacts"));
+
+            if (contacts[selectedPeer] !== null && contacts[selectedPeer] !== "" && contacts[selectedPeer] !== undefined){
+                return contacts[selectedPeer]
+            }
+
         }
         return selectedPeer
-    }
+
+    };
+
 
     return(
         <>
@@ -91,7 +102,7 @@ const ContentHeader = () => {
                     sx={DetailsContainerBoxStyle}>
                     <Typography component={"span"}
                                 sx={DetailsTitleContainerTypographyStyle}
-                    >{retrieveAliasHandler()}</Typography>
+                    >{checkifAlias()}</Typography>
                     <Typography component={"span"}
                                 sx={DetailsSpanContainerTypographyStyle}
                                 >last seen 10 minutes ago</Typography>
