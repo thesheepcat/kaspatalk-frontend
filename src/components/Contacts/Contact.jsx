@@ -1,17 +1,68 @@
 import ListItem from "@mui/material/ListItem";
 import Box from "@mui/material/Box";
-import { Button, Typography } from "@mui/material";
+import {Button, Dialog, DialogTitle, Input, Typography} from "@mui/material";
 import {
     BothActionsContainerButtonStyle, CancelButtonContainerButtonStyle, ConfirmButtonContainerButtonStyle,
     ListItemShellContainerBoxStyle,
 } from "./Contact.styles.js";
 import {AddressContainerTypographyStyle} from "./ContactList.styles.js";
+import {
+    CloseButtonContainerButtonStyle,
+    ModalButtonsContainerBoxStyle,
+    ModalContainerDialogStyle,
+    ModalContentContainerBoxStyle, ModalInputContainerInputStyle,
+    ModalTitleContainerDialogTitleStyle, SendButtonContainerButtonStyle
+} from "../Chat/SidePanel/Header.styles.js";
+import { useState} from "react";
 
 const Contact = ({ name, address }) => {
+    const [openModal, setOpenModal] = useState(false);
+    const [newAlias, setNewAlias] = useState("");
+    const [currentName, setCurrentName] = useState(name);
+    const [currentAddress] = useState(address);
+
+
+
+    const openModalHandler = () => {
+        setOpenModal(true);
+    };
+    const closeModalHandler = () => {
+        setOpenModal(false);
+        setNewAlias("");
+
+    };
+    const saveAliasHandler = () => {
+        if (newAlias) {
+            try {
+                let contacts = JSON.parse(localStorage.getItem("Contacts"));
+                if (contacts) {
+                    contacts[address] = newAlias;
+                } else {
+                    contacts = { [address]: newAlias };
+                }
+
+                localStorage.setItem('Contacts', JSON.stringify(contacts));
+
+                setCurrentName(newAlias)
+                setNewAlias("");
+
+            } catch (error) {
+                console.error("Errore durante il salvataggio dei contatti:", error);
+            }
+        } else {
+            alert("Alias can't be empty");
+        }
+
+
+        closeModalHandler();
+    }
+
+
     return (
+        <>
         <ListItem sx={ListItemShellContainerBoxStyle}>
             <Typography component="span" >
-                {name}
+                {currentName}
             </Typography>
             <Typography
                 component="span"
@@ -20,7 +71,7 @@ const Contact = ({ name, address }) => {
                     justifyContent: "flex-start",
                 }}
             >
-                {address}
+                {currentAddress}
             </Typography>
             <Box sx={{    display: "flex",
                 gap: 1,
@@ -29,14 +80,75 @@ const Contact = ({ name, address }) => {
                 justifyContent: "center",
                 alignItems: "center",  }}>
 
-                <Button sx={{ ...BothActionsContainerButtonStyle, ...ConfirmButtonContainerButtonStyle }} variant="outlined" size="small">
+                <Button onClick={openModalHandler}
+                        sx={{ ...BothActionsContainerButtonStyle, ...ConfirmButtonContainerButtonStyle }}
+                        variant="outlined"
+                        size="small">
                     Edit
                 </Button>
-                <Button sx={{ ...BothActionsContainerButtonStyle, ...CancelButtonContainerButtonStyle }} variant="outlined" size="small" color="error">
+                <Button sx={{ ...BothActionsContainerButtonStyle, ...CancelButtonContainerButtonStyle }}
+                        variant="outlined"
+                        size="small"
+                        color="error">
                     Delete
                 </Button>
             </Box>
         </ListItem>
+
+            <Dialog open={openModal}
+                    onClose={closeModalHandler}
+                    slotProps={{
+                        backdrop: {
+                            sx: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.25)',
+                            },
+                        },
+
+                    }}
+
+                    sx={ModalContainerDialogStyle}>
+                <Box  sx={ModalContentContainerBoxStyle} >
+                    <DialogTitle sx={ModalTitleContainerDialogTitleStyle}>Save Address</DialogTitle>
+
+                    <Box>
+                        <label>Address</label>
+                        <Input
+                            type="text"
+                            value={address}
+                            disabled={true}
+                            sx={ModalInputContainerInputStyle}
+                            disableUnderline={true}
+                        />
+                    </Box>
+                    <Box>
+                        <label>New Alias:</label>
+                        <Input
+                            type="text"
+                            id="newAlias"
+                            value={newAlias}
+                            onChange={(event) => setNewAlias(event.target.value)}
+                            placeholder="Enter Alias for the address"
+                            sx={ModalInputContainerInputStyle}
+                            disableUnderline={true}
+                        />
+                    </Box>
+
+                    <Box sx={ModalButtonsContainerBoxStyle} >
+                        <Button
+                            onClick={() => {saveAliasHandler()}}
+
+                            sx={SendButtonContainerButtonStyle}>
+
+                            Save
+                        </Button>
+                        <Button onClick={closeModalHandler}
+                                sx={CloseButtonContainerButtonStyle}>
+                            Cancel
+                        </Button>
+                    </Box>
+                </Box>
+            </Dialog>
+        </>
     );
 };
 
