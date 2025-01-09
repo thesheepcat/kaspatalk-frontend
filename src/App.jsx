@@ -8,7 +8,10 @@ import LogoutView from "./views/LogoutView.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import styles from "./App.module.css"
 import GeneralContextProvider from './components/ContextProviders/GeneralContextProvider.jsx'
+import UserKeysContextProvider from './components/ContextProviders/UserKeysContextProvider.jsx'
+import UserSettingsContextProvider from "./components/ContextProviders/UserSettingsContextProvider.jsx";
 import AppLayout from "./views/AppLayout.jsx";
+
  
 function App() {  
   // Create routing between all available views
@@ -30,9 +33,13 @@ function App() {
 
   return (
       <GeneralContextProvider>
-        <main className={styles.main}>
-            <RouterProvider router={router} />
-        </main>
+        <UserSettingsContextProvider>
+          <UserKeysContextProvider>
+            <main className={styles.main}>
+              <RouterProvider router={router} />
+            </main>
+          </UserKeysContextProvider>
+        </UserSettingsContextProvider>
       </GeneralContextProvider>
   )
 }

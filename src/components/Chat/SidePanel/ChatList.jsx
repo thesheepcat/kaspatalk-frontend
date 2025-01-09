@@ -2,9 +2,11 @@ import ChatBox from "./ChatBox";
 import styles from "./ChatList.module.css";
 import {useContext, useEffect} from "react";
 import { GeneralContext } from "../../ContextProviders/GeneralContextProvider";
+import { UserKeysContext } from "../../ContextProviders/UserKeysContextProvider.jsx"
 
 const ChatList = () => {
-    const { peersList, setPeersList, userAddress }= useContext(GeneralContext);
+    const { peersList, setPeersList }= useContext(GeneralContext);
+    const { userAddress }= useContext(UserKeysContext);
 
     const fetchPeers = async () => {
         try {
