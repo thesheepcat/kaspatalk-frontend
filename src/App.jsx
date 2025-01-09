@@ -13,7 +13,7 @@ import UserSettingsContextProvider from "./components/ContextProviders/UserSetti
 import AppLayout from "./views/AppLayout.jsx";
 
  
-function App() {  
+const App = () => {  
   // Create routing between all available views
   const router = createBrowserRouter([
     { path: "/", 
@@ -26,7 +26,6 @@ function App() {
         {path: "/user-profile", element: <UserProfileView/>},
         {path: "/contacts", element: <ContactsView/>},    
         {path: "/settings", element: <SettingsView/>}
-        
       ]
     }
   ])
@@ -44,4 +43,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

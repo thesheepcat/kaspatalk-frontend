@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import loadKaspaSDK from "../../kaspa-wasm32-sdk/web/kaspa/kaspa.js";
@@ -6,8 +6,6 @@ import loadKaspaSDK from "../../kaspa-wasm32-sdk/web/kaspa/kaspa.js";
 export const GeneralContext = createContext();
 
 const GeneralContextProvider = ({children}) => {
-    loadKaspaSDK();
-
     const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
     const [peersList, setPeersList] = useState([]);
     const [selectedPeer, setSelectedPeer] = useState("");
@@ -20,6 +18,10 @@ const GeneralContextProvider = ({children}) => {
       openMenuDrawer,
       setOpenMenuDrawer
     }
+
+    useEffect(() => {
+        loadKaspaSDK();
+    }, [])
 
     return(
         <GeneralContext.Provider value={value}>
