@@ -6,7 +6,6 @@ import ContactsView from "./views/ContactsView.jsx";
 import SettingsView from "./views/SettingsView.jsx";
 import LogoutView from "./views/LogoutView.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import styles from "./App.module.css"
 import GeneralContextProvider from './components/ContextProviders/GeneralContextProvider.jsx'
 import UserKeysContextProvider from './components/ContextProviders/UserKeysContextProvider.jsx'
 import UserSettingsContextProvider from "./components/ContextProviders/UserSettingsContextProvider.jsx";
@@ -34,9 +33,7 @@ const App = () => {
       <GeneralContextProvider>
         <UserSettingsContextProvider>
           <UserKeysContextProvider>
-            <main className={styles.main}>
               <RouterProvider router={router} />
-            </main>
           </UserKeysContextProvider>
         </UserSettingsContextProvider>
       </GeneralContextProvider>
