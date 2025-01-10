@@ -3,11 +3,11 @@ import ChatContainer from "./ChatContainer.jsx";
 import ContentHeader from "./ContentHeader.jsx";
 import SendMessageBox from "./SendMessageBox.jsx";
 import {useContext} from "react";
-import { GeneralContextProvider} from "../../ContextProviders/GeneralContextProvider.jsx";
+import { GeneralContext} from "../../ContextProviders/GeneralContextProvider.jsx";
 
 
 const MainWindow = () => {
-    const {selectedPeer} = useContext(GeneralContextProvider);
+    const {selectedPeer} = useContext(GeneralContext);
     return(
         <section className={styles.contentArea}>
             <div className={styles.container} >

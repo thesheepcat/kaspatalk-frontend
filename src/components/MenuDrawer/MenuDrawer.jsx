@@ -12,7 +12,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useContext, useState } from 'react';
-import { GeneralContextProvider} from "../ContextProviders/GeneralContextProvider.jsx";
+import { GeneralContext} from "../ContextProviders/GeneralContextProvider.jsx";
 import { menuDrawerBoxStyle, listItemButtonStyle, selectedListItemButtonStyle } from "./MenuDrawer.styles.js";
 import { useNavigate } from "react-router-dom";
 
@@ -24,12 +24,12 @@ class DrawerItem {
 }};
 
 const MenuDrawer = () => {
-  const { openMenuDrawer, updateOpenMenuDrawer } = useContext(GeneralContextProvider);
+  const { openMenuDrawer, setOpenMenuDrawer } = useContext(GeneralContext);
   const [ selectedItem, setSelectedItem ] = useState();
   const navigateViews = useNavigate();
   
   const toggleDrawer = (newOpen) => {
-    updateOpenMenuDrawer(newOpen);
+    setOpenMenuDrawer(newOpen);
   };
 
   const handleSelectMenuItem = (menuItem) => {

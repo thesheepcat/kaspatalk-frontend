@@ -1,29 +1,27 @@
 import styles from "./ChatContainer.module.css";
 import Message from "./Message.jsx";
 import {useRef, useEffect, useContext, useState} from "react";
-import { GeneralContextProvider} from "../../ContextProviders/GeneralContextProvider.jsx";
+import { GeneralContext } from "../../ContextProviders/GeneralContextProvider.jsx";
+import { UserKeysContext } from "../../ContextProviders/UserKeysContextProvider.jsx";
 
 const ChatContainer = () => {
     const messageListRef = useRef(null);
     const chatContainerRef = useRef(null);
-    const {selectedPeer, userAddress} = useContext(GeneralContextProvider);
+    const { selectedPeer } = useContext(GeneralContext);
+    const { userAddress } = useContext(UserKeysContext);
     const [ messages, setMessages ] = useState([]);
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [ isScrolled, setIsScrolled ] = useState(false);
 
     const handleWheel = () => {
         const scrollTop = chatContainerRef.current.scrollTop;
         const scrollHeight = chatContainerRef.current.scrollHeight;
         const clientHeight = chatContainerRef.current.clientHeight;
         const scrollDistanceFromBottom = scrollHeight - clientHeight - scrollTop;
-        //console.log(scrollDistanceFromBottom);
         if(scrollDistanceFromBottom > 5){
             setIsScrolled(true);
-            //console.log(isScrolled);
             return;
         }
         setIsScrolled(false);
-        //console.log("isScrolled: ", isScrolled);
-
     }
     const fetchMessages = async () => {
         try {

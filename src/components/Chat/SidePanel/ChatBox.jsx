@@ -1,11 +1,11 @@
 import styles from "./ChatBox.module.css";
 import {useContext, useEffect, useState} from "react";
-import { GeneralContextProvider } from "../../ContextProviders/GeneralContextProvider";
+import { GeneralContext } from "../../ContextProviders/GeneralContextProvider";
 import { toSvg } from "jdenticon";
 
 const ChatBox = (peerName) => {
     const [ trimmedPeerName, setTrimmedPeerName] = useState();
-    const { selectedPeer, selectPeer } = useContext(GeneralContextProvider);
+    const { selectedPeer, setSelectedPeer } = useContext(GeneralContext);
     const [ peerImage, setPeerImage] = useState();
         
     // Dynamically create peer image
@@ -18,7 +18,7 @@ const ChatBox = (peerName) => {
     
     // Handle peer selection from chat list
     const handlePeerClick = (peerName) => {
-        selectPeer(peerName);
+        setSelectedPeer(peerName);
     }
 
     const trimPeerName = (completePeerName) => {

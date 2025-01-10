@@ -2,12 +2,16 @@ import { useContext, useState } from "react";
 import styles from "./SendMessageBox.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceSmile, faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { GeneralContextProvider} from "../../ContextProviders/GeneralContextProvider.jsx";
+import { GeneralContext} from "../../ContextProviders/GeneralContextProvider.jsx";
+import { UserKeysContext } from "../../ContextProviders/UserKeysContextProvider.jsx";
+import { UserSettingsContext } from "../../ContextProviders/UserSettingsContextProvider.jsx";
 import { sendTransaction } from "../../../utils/sendTransaction.js";
 import { encryptMessage } from "../../../utils/e2ee.js";
 
 const SendMessageBox = () => {
-    const { selectedPeer, userPrivKey, networkIdentifier, kaspaNodeWrpc } = useContext(GeneralContextProvider);
+    const { selectedPeer } = useContext(GeneralContext);
+    const { userPrivateKey } = useContext(UserKeysContext);
+    const { networkIdentifier, kaspaNodeWrpc } = useContext(UserSettingsContext);
     const [ messageText, setMessageText ] = useState("");
     const [ isSendingMessage, setIsSendingMessage ] = useState(false);
     
@@ -22,9 +26,9 @@ const SendMessageBox = () => {
         }
         try {
             setIsSendingMessage(true);
-            const [ encryptedMessage, ivHex ] = await encryptMessage(userPrivKey, messageText, selectedPeer);
+            const [ encryptedMessage, ivHex ] = await encryptMessage(userPrivateKey, messageText, selectedPeer);
             const encryptedPayload = encryptedMessage + "|" + ivHex;
-            await sendTransaction(userPrivKey, selectedPeer, encryptedPayload, networkIdentifier, kaspaNodeWrpc);
+            await sendTransaction(userPrivateKey, selectedPeer, encryptedPayload, networkIdentifier, kaspaNodeWrpc);
             setIsSendingMessage(false);
             setMessageText("");
         } catch (sendingTransactionError) {

@@ -2,17 +2,19 @@ import PropTypes from 'prop-types';
 import styles from "./Message.module.css"
 import { useState, useEffect, useContext } from "react"; 
 import { decryptMessage } from "../../../utils/e2ee.js";
-import { GeneralContextProvider } from "../../ContextProviders/GeneralContextProvider.jsx";
+import { GeneralContext } from "../../ContextProviders/GeneralContextProvider.jsx";
+import { UserKeysContext } from "../../ContextProviders/UserKeysContextProvider.jsx"
 
 const Message = ({isReceivedMessage, encryptedPayload, timestamp}) => {
-    const { userPrivKey, selectedPeer } = useContext(GeneralContextProvider); 
+    const { selectedPeer } = useContext(GeneralContext); 
+    const { userPrivateKey } = useContext(UserKeysContext); 
     const [ decryptedMessage, setDecryptedMessage ] = useState();
 
     // Decrypt message
     useEffect(() => {
         try {
             const [ encryptedMessage, ivHex ] = encryptedPayload.split("|");
-            setDecryptedMessage(decryptMessage(userPrivKey, encryptedMessage, ivHex, selectedPeer));
+            setDecryptedMessage(decryptMessage(userPrivateKey, encryptedMessage, ivHex, selectedPeer));
         } catch (error) {
             console.log("Error while decrypting message: ", error);
         }
