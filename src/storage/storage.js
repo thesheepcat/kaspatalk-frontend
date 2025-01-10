@@ -1,14 +1,16 @@
 // Save data on local storage
-const setItem = async (key, value) => {
+const setItem = (key, value) => {
     try {
         localStorage.setItem(key, JSON.stringify(value));
+        return true;
     } catch (error) {
         console.log("Error while saving data on local storage: ", error);
+        return false;
     }
 }
 
 // Get data from local storage
-const getItem = async (key) => {
+const getItem = (key) => {
     let valueRaw;
     try {
         valueRaw = localStorage.getItem(key);
@@ -27,7 +29,7 @@ const getItem = async (key) => {
 }
 
 // Remove data from local storage
-const removeItem = async (key) => {
+const removeItem = (key) => {
     try {
         localStorage.removeItem(key);
     } catch (error) {
@@ -36,28 +38,44 @@ const removeItem = async (key) => {
 }
 
 // Storage functions for keys
-export const getKeys = async () => {
-    getItem('keys');
+export const getObjectFromDb = (keys) => {
+    return getItem(keys);
+};
+export const checkObjectInDb = (dictName, keyName) => {
+    let shellObject = getItem(dictName);
+    if (shellObject !== null) {
+        try {
+            let keyToCheck = shellObject[keyName]
+            return keyToCheck !== null && keyToCheck !== undefined && keyToCheck !== "";
+
+        }
+        catch {
+            return false;
+        }
+    }
+}
+export const getKeyValueFromDbObject = (dictName, key) => {
+    return getItem(dictName)[key];
+}
+
+export const storeObjectInDb = (key, value) => {
+    setItem(key, value);
 };
 
-export const storeKeys = async (keys) => {
-    setItem('keys', keys);
-};
-
-export const removeKeys = async () => {
+export const removeKeys =  () => {
     removeItem('keys');
 };
 
-// Storage functions for contacts
-export const getContacts = async () => {
-    getItem('contacts');
-};
-
-export const storeContacts = async (contacts) => {
-    setItem('contacts', contacts);
-};
-
-export const removeContacts = async () => {
-    removeItem('contacts');
-};
-
+// // Storage functions for contacts
+// export const getContacts = async () => {
+//     getItem('contacts');
+// };
+//
+// export const storeContacts = async (contacts) => {
+//     setItem('contacts', contacts);
+// };
+//
+// export const removeContacts = async () => {
+//     removeItem('contacts');
+// };
+//

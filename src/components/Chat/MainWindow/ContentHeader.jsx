@@ -22,6 +22,7 @@ import {
     ModalContentContainerBoxStyle, ModalInputContainerInputStyle,
     ModalTitleContainerDialogTitleStyle, SendButtonContainerButtonStyle
 } from "../SidePanel/Header.styles.js";
+import {checkObjectInDb, getKeyValueFromDbObject, getObjectFromDb, storeObjectInDb} from "../../../storage/storage.js";
 
 const ContentHeader = () => {
     const { selectedPeer } = useContext(GeneralContextProvider);
@@ -47,41 +48,28 @@ const ContentHeader = () => {
         setNewAlias("");
 
     };
-    const saveAliasHandler = () => {
+    const saveAliasHandler = async () => {
         if (newAlias) {
-            try {
-                let contacts = JSON.parse(localStorage.getItem("Contacts"));
-                if (contacts) {
-                    contacts[selectedPeer] = newAlias;
-                } else {
-                    contacts = { [selectedPeer]: newAlias };
-                }
-
-                localStorage.setItem('Contacts', JSON.stringify(contacts));
-
-                setNewAlias("");
-
-            } catch (error) {
-                console.error("Errore durante il salvataggio dei contatti:", error);
+            let contacts = getObjectFromDb("Contacts")
+            if (contacts) {
+                contacts[selectedPeer] = newAlias;
+            } else {
+                contacts = {[selectedPeer]: newAlias};
             }
-        } else {
+            storeObjectInDb("Contacts", contacts);
+            setNewAlias("");
+        }
+         else {
             alert("Alias can't be empty");
         }
-
-
         closeModalHandler();
     }
     const checkifAlias = () => {
-        if (localStorage.getItem("Contacts") !== null){
 
-            let contacts = JSON.parse(localStorage.getItem("Contacts"));
-
-            if (contacts[selectedPeer] !== null && contacts[selectedPeer] !== "" && contacts[selectedPeer] !== undefined){
-                return contacts[selectedPeer]
-            }
-
+        if (checkObjectInDb("Contacts", selectedPeer)){
+            return getKeyValueFromDbObject("Contacts", selectedPeer);
         }
-        return selectedPeer
+        return ""
 
     };
 
@@ -104,8 +92,12 @@ const ContentHeader = () => {
                                 sx={DetailsTitleContainerTypographyStyle}
                     >{checkifAlias()}</Typography>
                     <Typography component={"span"}
+                                sx={DetailsTitleContainerTypographyStyle}
+                    >{selectedPeer}</Typography>
+                    <Typography component={"span"}
                                 sx={DetailsSpanContainerTypographyStyle}
                                 >last seen 10 minutes ago</Typography>
+
                 </Box>
                 <Box
                      sx={IconsContainerBoxStyle}>
@@ -147,7 +139,7 @@ const ContentHeader = () => {
                             id="newAlias"
                             value={newAlias}
                             onChange={(event) => setNewAlias(event.target.value)}
-                            placeholder="Enter Alias for the address"
+                            placeholder={checkObjectInDb("Contacts", selectedPeer)? getKeyValueFromDbObject("Contacts", selectedPeer):"Enter Alias for the address"}
                             sx={ModalInputContainerInputStyle}
                             disableUnderline={true}
                         />
