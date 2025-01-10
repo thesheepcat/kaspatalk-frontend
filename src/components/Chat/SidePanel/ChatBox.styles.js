@@ -43,12 +43,16 @@ export const ChatDetailsContainerBoxStyle = {
 }
 export const ChatTitleContainerBoxStyle = {
     display: 'flex',
-    alignItems: 'center',
+    flexDirection: 'column',
+    gap: '0.5rem',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
     fontSize: '0.8rem'
 }
 export const BothH3TitleAndChatTileStyle = {
+
     fontSize: '1rem',
-    fontWeight: 500
+    fontWeight: 500,
+
 
 }

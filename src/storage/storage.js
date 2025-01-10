@@ -47,7 +47,6 @@ export const checkObjectInDb = (dictName, keyName) => {
         try {
             let keyToCheck = shellObject[keyName]
             return keyToCheck !== null && keyToCheck !== undefined && keyToCheck !== "";
-
         }
         catch {
             return false;

@@ -1,9 +1,8 @@
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsisV, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { useContext, useEffect, useState } from "react";
-import { GeneralContextProvider } from "../../ContextProviders/GeneralContextProvider.jsx";
-import { toSvg } from "jdenticon";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faEllipsisV, faSearch} from '@fortawesome/free-solid-svg-icons';
+import {useContext, useEffect, useState} from "react";
+import {GeneralContextProvider} from "../../ContextProviders/GeneralContextProvider.jsx";
+import {toSvg} from "jdenticon";
 import Box from "@mui/material/Box";
 import {Button, Dialog, DialogTitle, IconButton, ImageListItem, Input, Typography} from "@mui/material";
 import {
@@ -23,13 +22,14 @@ import {
     ModalTitleContainerDialogTitleStyle, SendButtonContainerButtonStyle
 } from "../SidePanel/Header.styles.js";
 import {checkObjectInDb, getKeyValueFromDbObject, getObjectFromDb, storeObjectInDb} from "../../../storage/storage.js";
+import {newAliasEvent} from "../../../utils/CustomEvents.js";
 
 const ContentHeader = () => {
-    const { selectedPeer } = useContext(GeneralContextProvider);
-    const [ peerImage, setPeerImage] = useState();
+    const {selectedPeer} = useContext(GeneralContextProvider);
+    const [peerImage, setPeerImage] = useState();
     const [openModal, setOpenModal] = useState(false);
     const [newAlias, setNewAlias] = useState("");
-    
+
     // Dynamically create peer image
     useEffect(() => {
         const imageFromSelectedPeerName = toSvg(selectedPeer, 100);
@@ -46,7 +46,6 @@ const ContentHeader = () => {
     const closeModalHandler = () => {
         setOpenModal(false);
         setNewAlias("");
-
     };
     const saveAliasHandler = async () => {
         if (newAlias) {
@@ -58,31 +57,33 @@ const ContentHeader = () => {
             }
             storeObjectInDb("Contacts", contacts);
             setNewAlias("");
-        }
-         else {
+        } else {
             alert("Alias can't be empty");
         }
         closeModalHandler();
     }
     const checkifAlias = () => {
 
-        if (checkObjectInDb("Contacts", selectedPeer)){
+        if (checkObjectInDb("Contacts", selectedPeer)) {
             return getKeyValueFromDbObject("Contacts", selectedPeer);
         }
         return ""
 
     };
+    useEffect(() => {
+        document.dispatchEvent(newAliasEvent(newAlias, selectedPeer));
+    }, [newAlias]);
 
 
-    return(
+    return (
         <>
-        <Box
-             sx={ContentHeaderContainerBoxStyle}>
+            <Box
+                sx={ContentHeaderContainerBoxStyle}>
                 <Box
                     sx={ImageContainerBoxStyle}>
                     <ImageListItem
                         sx={ImageContainerImageStyle}>
-                        <img src={peerImage} alt="peerImage" />
+                        <img src={peerImage} alt="peerImage"/>
                     </ImageListItem>
 
                 </Box>
@@ -96,17 +97,17 @@ const ContentHeader = () => {
                     >{selectedPeer}</Typography>
                     <Typography component={"span"}
                                 sx={DetailsSpanContainerTypographyStyle}
-                                >last seen 10 minutes ago</Typography>
+                    >last seen 10 minutes ago</Typography>
 
                 </Box>
                 <Box
-                     sx={IconsContainerBoxStyle}>
-                    <FontAwesomeIcon icon={faSearch} />
+                    sx={IconsContainerBoxStyle}>
+                    <FontAwesomeIcon icon={faSearch}/>
                     <IconButton onClick={openModalHandler}>
                         <FontAwesomeIcon icon={faEllipsisV}/>
                     </IconButton>
                 </Box>
-        </Box>
+            </Box>
             <Dialog open={openModal}
                     onClose={closeModalHandler}
                     slotProps={{
@@ -119,7 +120,7 @@ const ContentHeader = () => {
                     }}
 
                     sx={ModalContainerDialogStyle}>
-                <Box  sx={ModalContentContainerBoxStyle} >
+                <Box sx={ModalContentContainerBoxStyle}>
                     <DialogTitle sx={ModalTitleContainerDialogTitleStyle}>Save Address</DialogTitle>
 
                     <Box>
@@ -139,15 +140,17 @@ const ContentHeader = () => {
                             id="newAlias"
                             value={newAlias}
                             onChange={(event) => setNewAlias(event.target.value)}
-                            placeholder={checkObjectInDb("Contacts", selectedPeer)? getKeyValueFromDbObject("Contacts", selectedPeer):"Enter Alias for the address"}
+                            placeholder={checkObjectInDb("Contacts", selectedPeer) ? getKeyValueFromDbObject("Contacts", selectedPeer) : "Enter Alias for the address"}
                             sx={ModalInputContainerInputStyle}
                             disableUnderline={true}
                         />
                     </Box>
 
-                    <Box sx={ModalButtonsContainerBoxStyle} >
+                    <Box sx={ModalButtonsContainerBoxStyle}>
                         <Button
-                            onClick={() => {saveAliasHandler()}}
+                            onClick={() => {
+                                saveAliasHandler();
+                            }}
 
                             sx={SendButtonContainerButtonStyle}>
 
