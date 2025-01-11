@@ -27,11 +27,10 @@ const Logo = styled("img")({
 
 const LoginForm = () => {
   const { setUserPrivatekey, setUserAddress } = useContext(UserKeysContext);
-  const { networkIdentifier } = useContext(UserSettingsContext)
-  const [ formPrivateKey, setFormPrivateKey] = useState("")
-  const [ formAddress, setFormAddress ] = useState("")
-  const [ isFormAddressCorrect, setIsFormAddressCorrect ] = useState()
-  
+  const { networkIdentifier } = useContext(UserSettingsContext);
+  const [ formPrivateKey, setFormPrivateKey] = useState("");
+  const [ formAddress, setFormAddress ] = useState("");
+  const [ isFormAddressCorrect, setIsFormAddressCorrect ] = useState();
   const [ privateKeyInputError, setPrivateKeyInputError ] = useState();
   const [ submitStatus, setSubmitStatus ] = useState("");
 
@@ -71,11 +70,6 @@ const LoginForm = () => {
       setPrivateKeyInputError(null);
     }
   };
-
-  const handleMoveToChat = () => {
-    //const navigate = useNavigate();
-    //navigate('/chat');
-  }
 
   return (
     <Container>
@@ -121,7 +115,6 @@ const LoginForm = () => {
               </InputAdornment>
             )
           }}
-
         />
 
         <TextField
