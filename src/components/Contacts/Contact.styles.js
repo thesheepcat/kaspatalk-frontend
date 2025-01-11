@@ -1,18 +1,21 @@
-export const ListItemShellContainerBoxStyle = {
-    display: "grid",
-    gridTemplateColumns: "1fr 2fr 1fr",
-    gap: "16px",
-    width: "100%",
-    padding: "8px",
-    border: "1px solid grey",
-    borderRadius: "5px",
-};
 
 
 export const BothActionsContainerButtonStyle = {
     display: 'flex',
     gap: '10px',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+
 }
+export const ButtonContainerBoxStyle = {
+    display: "flex",
+    gap: 1,
+    alignSelf: "center",
+    width: "100%",
+    alignItems: "center",
+}
+
 export const ConfirmButtonContainerButtonStyle = {
     padding: '5px 10px',
     cursor: 'pointer',
@@ -24,16 +27,4 @@ export const ConfirmButtonContainerButtonStyle = {
         backgroundColor: '#45a049',
     },
     width: '70px',
-}
-export const CancelButtonContainerButtonStyle = {
-    padding: '5px 10px',
-    cursor: 'pointer',
-    border: 'none',
-    borderRadius: '4px',
-    backgroundColor: '#f44336',
-    color: 'white',
-    '&:hover': {
-        backgroundColor: '#e53935',
-    },
-    width: '70px'
 }

@@ -29,7 +29,7 @@ const getItem = (key) => {
 }
 
 // Remove data from local storage
-const removeItem = (key) => {
+export const removeItem = (key) => {
     try {
         localStorage.removeItem(key);
     } catch (error) {
@@ -37,10 +37,6 @@ const removeItem = (key) => {
     }
 }
 
-// Storage functions for keys
-export const getObjectFromDb = (keys) => {
-    return getItem(keys);
-};
 export const checkObjectInDb = (dictName, keyName) => {
     let shellObject = getItem(dictName);
     if (shellObject !== null) {
@@ -53,6 +49,11 @@ export const checkObjectInDb = (dictName, keyName) => {
         }
     }
 }
+// Storage functions for keys
+export const getObjectFromDb = (keys) => {
+    return getItem(keys);
+};
+
 export const getKeyValueFromDbObject = (dictName, key) => {
     return getItem(dictName)[key];
 }
@@ -61,9 +62,13 @@ export const storeObjectInDb = (key, value) => {
     setItem(key, value);
 };
 
-export const removeKeys =  () => {
-    removeItem('keys');
+export const removeKeyPairFromDb =  (dictName, keyToDelete) => {
+
+    if(checkObjectInDb(dictName, keyToDelete)) {
+        return setItem(dictName, ((obj) => { delete obj[keyToDelete]; return obj; })(getItem(dictName)));
+    }
 };
+
 
 // // Storage functions for contacts
 // export const getContacts = async () => {
