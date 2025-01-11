@@ -11,6 +11,7 @@ import {
     ChatImageSmallScreenContainerImageListItemStyle, ChatTitleContainerBoxStyle,
     SelectedChatBoxContainerBoxStyle
 } from "./ChatBox.styles.js";
+import {checkObjectInDb, getKeyValueFromDbObject} from "../../../storage/storage.js";
 
 
 const ChatBox = (peerName) => {
@@ -18,6 +19,7 @@ const ChatBox = (peerName) => {
     const { selectedPeer, selectPeer } = useContext(GeneralContextProvider);
     const [ peerImage, setPeerImage] = useState();
     const isSmallScreen = useMediaQuery("(max-width:1070px)");
+    const [newAlias, setNewAlias] = useState("");
         
     // Dynamically create peer image
     const createProfileImage = (peerName) => {
@@ -34,23 +36,16 @@ const ChatBox = (peerName) => {
 
     const trimPeerName = (completePeerName) => {
         // Split the string at the colon to separate the part before and after
-        try{
-            let contacts = JSON.parse(localStorage.getItem("Contacts"));
-            if (contacts[peerName.peerName] !== null && contacts[peerName.peerName] !== "" && contacts[peerName.peerName] !== undefined){
-                let name = contacts[peerName.peerName];
-                setTrimmedPeerName(name)
-            }
-        }
-        catch(error){
-            console.log(error);
-            let parts = completePeerName.peerName.split(':');
-            let firstPart = parts[0];
-            let secondPart = parts[1];
-            let start = secondPart.slice(0, 6);
-            let end = secondPart.slice(-6);
-            setTrimmedPeerName(firstPart + ":" + start + "..." + end)
 
-        }
+
+        let parts = completePeerName.peerName.split(':');
+        let firstPart = parts[0];
+        let secondPart = parts[1];
+        let start = secondPart.slice(0, 6);
+        let end = secondPart.slice(-6);
+        setTrimmedPeerName(firstPart + ":" + start + "..." + end)
+
+
     }
     useEffect(() => {
         trimPeerName(peerName);
@@ -64,7 +59,18 @@ const ChatBox = (peerName) => {
             return SelectedChatBoxContainerBoxStyle
         }
     }
+    useEffect(() => {
+        checkObjectInDb("Contacts", peerName.peerName) ? setNewAlias(getKeyValueFromDbObject("Contacts", peerName.peerName)):setNewAlias("")
 
+    },[newAlias])
+
+    document.addEventListener("newAlias",(event) =>{
+        console.log(event.detail.address);
+        console.log(peerName.peerName);
+        if (event.detail.address === peerName.peerName){
+
+        setNewAlias(event.detail.alias);
+    }})
 
 
     return(
@@ -93,6 +99,7 @@ const ChatBox = (peerName) => {
                     </Box>
                     <Box  sx={ChatDetailsContainerBoxStyle}>
                      <Box  sx={{...ChatTitleContainerBoxStyle,...BothH3TitleAndChatTileStyle}}>
+                         <Typography variant="h3" sx={BothH3TitleAndChatTileStyle}>{newAlias}</Typography>
                          <Typography variant="h3" sx={BothH3TitleAndChatTileStyle}>{trimmedPeerName}</Typography>
                      </Box>
                     </Box>
