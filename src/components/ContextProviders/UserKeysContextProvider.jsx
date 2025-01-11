@@ -6,7 +6,7 @@ import { USER_PRIVATE_KEY, USER_ADDRESS } from "../../../userSettings.js";
 export const UserKeysContext = createContext();
 
 const UserKeysContextProvider = ({children}) => {
-  //const [userPrivateKey, setUserPrivatekey] = useState(USER_PRIVATE_KEY);
+  // const [userPrivateKey, setUserPrivatekey] = useState(USER_PRIVATE_KEY);
   const [userPrivateKey, setUserPrivatekey] = useState("");
   const [userPublicKey, setUserPublicKey] = useState("");
   //const [userAddress, setUserAddress] = useState(USER_ADDRESS);

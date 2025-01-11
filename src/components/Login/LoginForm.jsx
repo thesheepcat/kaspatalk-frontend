@@ -39,11 +39,7 @@ const LoginForm = () => {
     let newError = null;
     if (!formPrivateKey) {
       newError = "Private key is required";
-    } else if (false) {
-      // Add additional validations on Private Key #TODO
-      newError = "Private key is invalid. Please enter a valid private key";
     }
-
     setPrivateKeyInputError(newError);
     return newError === null;
   };
@@ -54,9 +50,6 @@ const LoginForm = () => {
       setSubmitStatus("success");
       setUserPrivatekey(formPrivateKey);
       setUserAddress(formAddress);
-      console.log("Form submitted:");
-      console.log("Private Key: ", formPrivateKey);
-      console.log("Address: ", formAddress);
     } else {
       setSubmitStatus("error");
     }

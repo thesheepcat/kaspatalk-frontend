@@ -7,6 +7,7 @@ export const GeneralContext = createContext();
 
 const GeneralContextProvider = ({children}) => {
     const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
+    const [ selectedMenuDrawerItem, setselectedMenuDrawerItem ] = useState();
     const [peersList, setPeersList] = useState([]);
     const [selectedPeer, setSelectedPeer] = useState("");
 
@@ -16,7 +17,9 @@ const GeneralContextProvider = ({children}) => {
       selectedPeer,
       setSelectedPeer,
       openMenuDrawer,
-      setOpenMenuDrawer
+      setOpenMenuDrawer,
+      selectedMenuDrawerItem,
+      setselectedMenuDrawerItem
     }
 
     const loadKaspaWasm = async () => {
