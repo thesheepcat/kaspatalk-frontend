@@ -11,13 +11,14 @@ You can run the frontend on a different machine than the one you are running the
 - Open your terminal
 - Git clone this repository
 - Copy userSettings-example.js in the same folder and rename it to userSettings.js
-- Open userSettings.js and modify USER_PRIVATE_KEY, BACKEND_NODE and KASPA_NODE_WRPC by adding your private key and the IP address of your machine running KaspaTalk backend and the IP address of your WRPC connection to Kaspa node 
+- Open userSettings.js and modify BACKEND_NODE and KASPA_NODE_WRPC by adding the IP address of your machine running KaspaTalk backend and the IP address of your WRPC connection to Kaspa node 
 - Open the main folder and run the following commands to install all required dependecies:
   - npm install vite
   - npm install
 - Activate the development server with the following command:
   - npm run dev
-- On your Chrome/Chromium browser open http://localhost:5173/ 
+- On your Chrome/Chromium browser open http://localhost:5173/
+- Insert your Private Key (your address is automatically derived)
 - Starts the first conversation by cliking the "pen" button on the top of the sidepanel
 
 **IMPORTANT**:

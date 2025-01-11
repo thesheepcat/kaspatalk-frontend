@@ -24,8 +24,7 @@ class DrawerItem {
 }};
 
 const MenuDrawer = () => {
-  const { openMenuDrawer, setOpenMenuDrawer } = useContext(GeneralContext);
-  const [ selectedItem, setSelectedItem ] = useState();
+  const { openMenuDrawer, setOpenMenuDrawer, selectedMenuDrawerItem, setselectedMenuDrawerItem } = useContext(GeneralContext);
   const navigateViews = useNavigate();
   
   const toggleDrawer = (newOpen) => {
@@ -33,7 +32,7 @@ const MenuDrawer = () => {
   };
 
   const handleSelectMenuItem = (menuItem) => {
-    setSelectedItem(menuItem.itemName);
+    setselectedMenuDrawerItem(menuItem.itemName);
     navigateViews(menuItem.route);
   };
 
@@ -51,9 +50,9 @@ const MenuDrawer = () => {
           <List>
             <ListItem>
               <ListItemButton sx={ 
-                selectedItem == chatMenuItem.itemName ? selectedListItemButtonStyle : listItemButtonStyle } 
+                selectedMenuDrawerItem == chatMenuItem.itemName ? selectedListItemButtonStyle : listItemButtonStyle } 
                 onClick={() => handleSelectMenuItem(chatMenuItem)}
-                disabled={selectedItem === chatMenuItem.itemName} >
+                disabled={selectedMenuDrawerItem === chatMenuItem.itemName} >
                 <ListItemIcon>
                   <ChatIcon />
                 </ListItemIcon>
@@ -62,9 +61,9 @@ const MenuDrawer = () => {
             </ListItem>
             <ListItem >
               <ListItemButton
-                sx={ selectedItem == userMenuItem.itemName ? selectedListItemButtonStyle : listItemButtonStyle } 
+                sx={ selectedMenuDrawerItem == userMenuItem.itemName ? selectedListItemButtonStyle : listItemButtonStyle } 
                 onClick={() => handleSelectMenuItem(userMenuItem)}
-                disabled={selectedItem === userMenuItem.itemName} >
+                disabled={selectedMenuDrawerItem === userMenuItem.itemName} >
                 <ListItemIcon>
                   <PersonIcon />
                 </ListItemIcon>
@@ -73,9 +72,9 @@ const MenuDrawer = () => {
             </ListItem>
             <ListItem >
               <ListItemButton 
-                sx={ selectedItem == contactsMenuItem.itemName ? selectedListItemButtonStyle : listItemButtonStyle } 
+                sx={ selectedMenuDrawerItem == contactsMenuItem.itemName ? selectedListItemButtonStyle : listItemButtonStyle } 
                 onClick={() => handleSelectMenuItem(contactsMenuItem)}
-                disabled={selectedItem === contactsMenuItem.itemName} >
+                disabled={selectedMenuDrawerItem === contactsMenuItem.itemName} >
                 <ListItemIcon>
                   <GroupIcon />
                 </ListItemIcon>
@@ -84,9 +83,9 @@ const MenuDrawer = () => {
             </ListItem>
             <ListItem >
               <ListItemButton 
-                sx={ selectedItem == settingsMenuItem.itemName ? selectedListItemButtonStyle : listItemButtonStyle } 
+                sx={ selectedMenuDrawerItem == settingsMenuItem.itemName ? selectedListItemButtonStyle : listItemButtonStyle } 
                 onClick={() => handleSelectMenuItem(settingsMenuItem)}
-                disabled={selectedItem === settingsMenuItem} >
+                disabled={selectedMenuDrawerItem === settingsMenuItem} >
                 <ListItemIcon>
                   <SettingsIcon />
                 </ListItemIcon>
@@ -98,9 +97,9 @@ const MenuDrawer = () => {
           <List>
             <ListItem>
               <ListItemButton 
-                sx={ selectedItem == logoutMenuItem.itemName ? selectedListItemButtonStyle : listItemButtonStyle } 
+                sx={ selectedMenuDrawerItem == logoutMenuItem.itemName ? selectedListItemButtonStyle : listItemButtonStyle } 
                 onClick={() => handleSelectMenuItem(logoutMenuItem)}
-                disabled={selectedItem === logoutMenuItem.itemName} >
+                disabled={selectedMenuDrawerItem === logoutMenuItem.itemName} >
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>
