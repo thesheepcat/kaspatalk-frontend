@@ -36,7 +36,7 @@ export const removeItem = (key) => {
         console.log("Error while deleting data from local storage: ", error);
     }
 }
-
+//check if Keyname is in DB and returns true or false
 export const checkObjectInDb = (dictName, keyName) => {
     let shellObject = getItem(dictName);
     if (shellObject !== null) {
@@ -49,7 +49,7 @@ export const checkObjectInDb = (dictName, keyName) => {
         }
     }
 }
-// Storage functions for keys
+
 export const getObjectFromDb = (keys) => {
     return getItem(keys);
 };
@@ -68,7 +68,17 @@ export const removeKeyPairFromDb =  (dictName, keyToDelete) => {
         return setItem(dictName, ((obj) => { delete obj[keyToDelete]; return obj; })(getItem(dictName)));
     }
 };
+// Storage functions for keys
+export const getKeys = async () => {
+    getItem('keys');
+};
 
+export const storeKeys = async (keys) => {
+    setItem('keys', keys);
+};
+
+export const removeKeys = async () => {
+    removeItem('keys');}
 
 // // Storage functions for contacts
 // export const getContacts = async () => {
