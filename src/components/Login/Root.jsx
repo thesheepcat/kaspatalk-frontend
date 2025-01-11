@@ -1,14 +1,12 @@
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import { Helmet } from 'react-helmet';
-import Login from "./Login.jsx";
+import LoginForm from './LoginForm.jsx';
 
 const Root = () => {
     return <>
-        <Helmet><title>KaspaTalk - Sign in</title></Helmet>
-        <Box sx={{width: '50%'}}>
+        <Box sx={{width: '60%'}}>
             <Card sx={{p: '26px 32px 46px 32px'}}>
-                <Login/>
+                <LoginForm/>
             </Card>
         </Box>
     </>;
