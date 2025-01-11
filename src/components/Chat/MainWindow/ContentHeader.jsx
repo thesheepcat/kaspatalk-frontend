@@ -95,9 +95,6 @@ const ContentHeader = () => {
                     <Typography component={"span"}
                                 sx={DetailsTitleContainerTypographyStyle}
                     >{selectedPeer}</Typography>
-                    <Typography component={"span"}
-                                sx={DetailsSpanContainerTypographyStyle}
-                    >last seen 10 minutes ago</Typography>
 
                 </Box>
                 <Box

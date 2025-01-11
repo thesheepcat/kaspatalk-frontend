@@ -7,5 +7,6 @@ export const ShellContainerBoxStyle = {
 export const TableCellCustomStyle = {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    margin: '0  0 1px  0',
 }

@@ -42,6 +42,6 @@ export const MessageTimeContainerTypographyStyle={
     fontSize: '0.7rem',
     color: '#707579',
     alignSelf: 'flex-end',
-    marginBottom: '-0.35rem',
-    marginRight: '-0.3rem',
+    margin: '0  -0.3rem  -0.35rem  0',
+
 }

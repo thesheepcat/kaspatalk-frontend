@@ -84,7 +84,7 @@ const ContactList = () => {
                             <TableCell>Name</TableCell>
                             <TableCell align="left">Address</TableCell>
                             <TableCell align="left"
-                                       marginBottom="1px"
+
                                        sx={TableCellCustomStyle}
                             >Actions
                                     <IconButton

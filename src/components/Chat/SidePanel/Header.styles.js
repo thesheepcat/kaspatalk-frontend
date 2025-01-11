@@ -83,7 +83,7 @@ export const ModalTitleContainerDialogTitleStyle = {
 export const ModalInputContainerInputStyle = {
     width: '100%',
     padding: '10px',
-    marginBottom: '15px',
+    margin: '0  0  10px  0',
     border: '1px solid #ccc',
     borderRadius: '4px',
 }
