@@ -27,16 +27,14 @@ const Header = () => {
     const [newPeerAddress, setNewPeerAddress] = useState("");
     const [messageArea, setMessageArea] = useState("");
     const [openModal, setOpenModal] = useState(false);
-    const {userPrivKey, updateOpenMenuDrawer} = useContext(GeneralContext);
+    const { setOpenMenuDrawer } = useContext(GeneralContext);
     const { userPrivateKey } = useContext(UserKeysContext);
     const { networkIdentifier, kaspaNodeWrpc } = useContext(UserSettingsContext);
     const StyledFontAwesomeIcon = styled(FontAwesomeIcon)({theme})
 
-
     const openModalHandler = () => {
         setOpenModal(true);
     };
-
 
     const closeModalHandler = () => {
         setOpenModal(false);
@@ -44,11 +42,11 @@ const Header = () => {
         setMessageArea("");
     };
 
-    const handleSendTransactionButton = async (userPrivKey, networkIdentifier, newPeerAddress, messageArea) => {
+    const handleSendTransactionButton = async (userPrivateKey, networkIdentifier, newPeerAddress, messageArea) => {
         try {
-            const [encryptedMessage, ivHex] = await encryptMessage(userPrivKey, messageArea, newPeerAddress);
+            const [encryptedMessage, ivHex] = await encryptMessage(userPrivateKey, messageArea, newPeerAddress);
             const encryptedPayload = encryptedMessage + "|" + ivHex;
-            await sendTransaction(userPrivKey, newPeerAddress, encryptedPayload, networkIdentifier, kaspaNodeWrpc);
+            await sendTransaction(userPrivateKey, newPeerAddress, encryptedPayload, networkIdentifier, kaspaNodeWrpc);
             closeModalHandler();
         } catch (sendingTransactionError) {
             console.log("sendingTransactionError")
@@ -64,7 +62,7 @@ const Header = () => {
 
                 <Box
                      sx={HeaderButtonContainerBoxStyle}
-                     onClick={() => updateOpenMenuDrawer(true)}>
+                     onClick={() => setOpenMenuDrawer(true)}>
 
                     <StyledFontAwesomeIcon icon={faBars}
                                            sx={HeaderButtonContainerStyledFontAwesomeIconStyle}/>
@@ -129,7 +127,7 @@ const Header = () => {
                     </Box>
                     <Box sx={ModalButtonsContainerBoxStyle} >
                         <Button
-                            onClick={() => handleSendTransactionButton(userPrivKey, networkIdentifier, newPeerAddress, messageArea)}
+                            onClick={() => handleSendTransactionButton(userPrivateKey, networkIdentifier, newPeerAddress, messageArea)}
 
                             sx={SendButtonContainerButtonStyle}>
 

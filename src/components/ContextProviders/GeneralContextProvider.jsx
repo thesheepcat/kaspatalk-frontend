@@ -6,10 +6,10 @@ import loadKaspaSDK from "../../kaspa-wasm32-sdk/web/kaspa/kaspa.js";
 export const GeneralContext = createContext();
 
 const GeneralContextProvider = ({children}) => {
-    const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
+    const [ openMenuDrawer, setOpenMenuDrawer ] = useState(false);
     const [ selectedMenuDrawerItem, setselectedMenuDrawerItem ] = useState();
-    const [peersList, setPeersList] = useState([]);
-    const [selectedPeer, setSelectedPeer] = useState("");
+    const [ peersList, setPeersList ] = useState([]);
+    const [ selectedPeer, setSelectedPeer ] = useState("");
 
     const value = {
       peersList,
