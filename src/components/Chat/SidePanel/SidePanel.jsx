@@ -1,15 +1,18 @@
 import Header from "./Header";
-import styles from "./SidePanel.module.css";
 import BodyContainer from "./BodyContainer";
+import Box from "@mui/material/Box";
+import {SidePanelContainerBoxStyle} from "./SidePanel.styles.js";
+
 
 const SidePanel = () => {
     
     
-    return(
-        <aside className={styles.sidePanel} >
+    return (
+
+        <Box sx={SidePanelContainerBoxStyle}>
             <Header />
             <BodyContainer />
-        </aside>
+        </Box>
     )
 }
 

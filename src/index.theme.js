@@ -9,6 +9,25 @@ const theme = createTheme({
       main: '#dc004e', // pink color for secondary
     },
   },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          '::-webkit-scrollbar': {
+            width: '0.5rem',
+          },
+          '::-webkit-scrollbar-track': {
+            background: 'transparent',
+          },
+          '::-webkit-scrollbar-thumb': {
+            borderRadius: '1rem',
+            backgroundColor: '#dbdada',
+          },
+
+        }
+      }
+    }
+  }
 });
 
 export default theme;

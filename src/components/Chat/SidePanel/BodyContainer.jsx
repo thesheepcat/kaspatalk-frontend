@@ -1,11 +1,12 @@
-import styles from "./BodyContainer.module.css";
 import ChatList from "./ChatList";
+import Box from "@mui/material/Box";
+import {BodyContainerContainerBoxStyle} from "./BodyContainer.styles.js";
 
 const BodyContainer = () => {
     return(
-        <div className={styles.BodyContainer}>
+        <Box sx={BodyContainerContainerBoxStyle}>
             <ChatList/>
-        </div>
+        </Box>
     );
 }
 

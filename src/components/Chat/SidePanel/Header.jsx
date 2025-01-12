@@ -1,102 +1,149 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons'
-import { faPen } from "@fortawesome/free-solid-svg-icons/faPen"
-import styles from "./Header.module.css"
-import { useState, useRef, useContext } from "react"
-import { GeneralContext} from "../../ContextProviders/GeneralContextProvider.jsx";
+import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faBars, faSearch, faPen } from '@fortawesome/free-solid-svg-icons'
+import { useState, useContext, useRef } from "react"
+import { GeneralContext } from "../../ContextProviders/GeneralContextProvider.jsx"
 import { UserKeysContext } from "../../ContextProviders/UserKeysContextProvider.jsx";
 import { UserSettingsContext } from "../../ContextProviders/UserSettingsContextProvider.jsx";
 import { sendTransaction } from "../../../utils/sendTransaction.js";
 import { encryptMessage } from "../../../utils/e2ee.js";
+import Box from "@mui/material/Box";
+import {Button, Dialog, DialogTitle, Input, styled} from "@mui/material";
+import theme from "../../../index.theme.js";
+import {
+    CloseButtonContainerButtonStyle,
+    HeaderButtonContainerBoxStyle,
+    HeaderButtonContainerStyledFontAwesomeIconStyle, ModalButtonsContainerBoxStyle,
+    ModalContainerDialogStyle,
+    ModalContentContainerBoxStyle, ModalInputContainerInputStyle,
+    ModalTitleContainerDialogTitleStyle,
+    SearchBoxContainerBoxStyle,
+    SearchBoxIconContainerStyledFontAwesomeIconStyle,
+    SearchBoxInputContainerInputStyle, SendButtonContainerButtonStyle,
+    SidePanelHeaderContainerBoxStyle
+} from "./Header.styles.js";
 
 const Header = () => {
+    const modalRef = useRef(null);
     const [newPeerAddress, setNewPeerAddress] = useState("");
     const [messageArea, setMessageArea] = useState("");
-    const { setOpenMenuDrawer} = useContext(GeneralContext);
+    const [openModal, setOpenModal] = useState(false);
+    const {userPrivKey, updateOpenMenuDrawer} = useContext(GeneralContext);
     const { userPrivateKey } = useContext(UserKeysContext);
     const { networkIdentifier, kaspaNodeWrpc } = useContext(UserSettingsContext);
-   
-    const modalRef = useRef(null);
-    const openModal = () => {
-        if (modalRef.current) {
-            modalRef.current.showModal();
-        }
-    };    
-    const closeModal = () => {
-        if (modalRef.current) {
-            modalRef.current.close();
-            setNewPeerAddress("");
-            setMessageArea("");
-        }
+    const StyledFontAwesomeIcon = styled(FontAwesomeIcon)({theme})
+
+
+    const openModalHandler = () => {
+        setOpenModal(true);
+    };
+
+
+    const closeModalHandler = () => {
+        setOpenModal(false);
+        setNewPeerAddress("");  // Reset dei campi del modale
+        setMessageArea("");
     };
 
     const handleSendTransactionButton = async (userPrivKey, networkIdentifier, newPeerAddress, messageArea) => {
         try {
-            const [ encryptedMessage, ivHex ] = await encryptMessage(userPrivKey, messageArea, newPeerAddress);
+            const [encryptedMessage, ivHex] = await encryptMessage(userPrivKey, messageArea, newPeerAddress);
             const encryptedPayload = encryptedMessage + "|" + ivHex;
             await sendTransaction(userPrivKey, newPeerAddress, encryptedPayload, networkIdentifier, kaspaNodeWrpc);
-            closeModal();
+            closeModalHandler();
         } catch (sendingTransactionError) {
             console.log("sendingTransactionError")
             console.log(sendingTransactionError)
         }
     };
 
-    return(
-        <>
-            <div className={styles.sidePanelHeader}>
 
-                <div className={styles.headerButton} onClick={() => setOpenMenuDrawer(true)}>
-                    <FontAwesomeIcon icon={faBars} className={styles.headerButtonIcon} />
-                </div>
-                <div className={styles.searchBox}>
-                    <FontAwesomeIcon icon={faSearch} className={styles.searchBoxIcon}/>
-                    <input type="text" placeholder="Search" className={styles.searchBoxInput}></input>
-                </div>
-                <div className={styles.headerButton} onClick={openModal}>
-                    <FontAwesomeIcon icon={faPen} className={styles.headerButtonIcon} />
-                </div>
-            </div>
-             {/* Start new conversation Modal Dialog */}
-            <dialog ref={modalRef} className={styles.modal}>
-                <div className={styles.modalContent}>
-                    <h2 className={styles.modalTitle} >Start a new conversation</h2>
-                    <div>
+    return (
+        <>
+            <Box
+                 sx={SidePanelHeaderContainerBoxStyle}>
+
+                <Box
+                     sx={HeaderButtonContainerBoxStyle}
+                     onClick={() => updateOpenMenuDrawer(true)}>
+
+                    <StyledFontAwesomeIcon icon={faBars}
+                                           sx={HeaderButtonContainerStyledFontAwesomeIconStyle}/>
+                </Box>
+                <Box
+                     sx={SearchBoxContainerBoxStyle}>
+                    <StyledFontAwesomeIcon icon={faSearch}
+                                           className={"styles.searchBoxIcon"}
+                                           sx={SearchBoxIconContainerStyledFontAwesomeIconStyle}/>
+                    <Input type="text"
+                           placeholder="Search"
+
+                           sx={SearchBoxInputContainerInputStyle}></Input>
+                </Box>
+                <Box
+                     sx={HeaderButtonContainerBoxStyle}
+                     onClick={openModalHandler}>
+                    <StyledFontAwesomeIcon icon={faPen}
+                                           sx={HeaderButtonContainerStyledFontAwesomeIconStyle}
+                                           className={"styles.headerButtonIcon"}/>
+                </Box>
+            </Box>
+            {/* Start new conversation Modal Dialog */}
+            <Dialog open={openModal}
+                    onClose={closeModalHandler}
+                    slotProps={{
+                        backdrop: {
+                            sx: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.25)',
+                            },
+                        },
+
+                    }}
+
+                    sx={ModalContainerDialogStyle}>
+                <Box  sx={ModalContentContainerBoxStyle} ref={modalRef}>
+                    <DialogTitle sx={ModalTitleContainerDialogTitleStyle}>Start a new conversation</DialogTitle>
+                    <Box>
                         <label>New Peer Address:</label>
-                        <input
+                        <Input
                             type="text"
                             id="newPeerAddress"
                             value={newPeerAddress}
                             onChange={(event) => setNewPeerAddress(event.target.value)}
                             placeholder="Enter new peer address"
-                            className={styles.modalInput}
+                            sx={ModalInputContainerInputStyle}
+                            disableUnderline={true}
                         />
-                    </div>
-                    <div>
+                    </Box>
+                    <Box>
                         <label>Message:</label>
-                        <textarea
+                        <Input
+                            type="text"
                             id="messageArea"
                             value={messageArea}
                             onChange={(event) => setMessageArea(event.target.value)}
                             placeholder="Write your message"
-                            className={styles.modalTextArea}
+                            disableUnderline={true}
+                            sx={ModalInputContainerInputStyle}
+
                         />
-                    </div>
-                    <div className={styles.modalButtons}>
-                        <button onClick={() => handleSendTransactionButton(userPrivateKey, networkIdentifier, newPeerAddress, messageArea)} className={styles.sendButton}>
-                            Send Message
-                        </button>
-                        <button onClick={closeModal} className={styles.closeButton}>
-                            Close
-                        </button>
-                    </div>
-                </div>
-            </dialog>   
+                    </Box>
+                    <Box sx={ModalButtonsContainerBoxStyle} >
+                        <Button
+                            onClick={() => handleSendTransactionButton(userPrivKey, networkIdentifier, newPeerAddress, messageArea)}
+
+                            sx={SendButtonContainerButtonStyle}>
+
+                            Send
+                        </Button>
+                        <Button onClick={closeModalHandler}
+                                sx={CloseButtonContainerButtonStyle}>
+                            Cancel
+                        </Button>
+                    </Box>
+                </Box>
+            </Dialog>
         </>
-    )
-}
+    );
+};
 
-export default Header
-
-
-//<Button onClick={toggleDrawer(true)}>Open drawer</Button>
+export default Header;

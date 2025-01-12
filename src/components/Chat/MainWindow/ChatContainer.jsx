@@ -1,12 +1,14 @@
-import styles from "./ChatContainer.module.css";
 import Message from "./Message.jsx";
 import {useRef, useEffect, useContext, useState} from "react";
 import { GeneralContext } from "../../ContextProviders/GeneralContextProvider.jsx";
+import Box from "@mui/material/Box";
+import {ChatContainerBoxStyle, MessagListContainerStyle} from "./ChatContainer.styles.js";
 import { UserKeysContext } from "../../ContextProviders/UserKeysContextProvider.jsx";
 
 const ChatContainer = () => {
     const messageListRef = useRef(null);
     const chatContainerRef = useRef(null);
+    const bottomDivRef = useRef(null);
     const { selectedPeer } = useContext(GeneralContext);
     const { userAddress } = useContext(UserKeysContext);
     const [ messages, setMessages ] = useState([]);
@@ -22,6 +24,7 @@ const ChatContainer = () => {
             return;
         }
         setIsScrolled(false);
+
     }
     const fetchMessages = async () => {
         try {
@@ -50,21 +53,33 @@ const ChatContainer = () => {
 
       }, [selectedPeer]);
 
-    //every time message changes it makes sure to scroll to the bottom
-    useEffect(() => {
-        if(!isScrolled){
-            messageListRef.current.scrollIntoView({behavior: "smooth", block: "end"});
+
+    const scrollToBottom = () => {
+        if (!isScrolled) {
+            bottomDivRef.current.scrollIntoView({behavior: 'smooth', block: 'end' });
         }
-    }, [messages]);
+    }
+
+    useEffect(() => {
+            const intervalId = setInterval(scrollToBottom, 100);
+            return () => {
+                clearInterval(intervalId);
+            };
+        }, [isScrolled]);
 
     return(
-        <div className={styles.chatContainer}
+        <Box
+             sx={ChatContainerBoxStyle}
              ref={chatContainerRef}
              onWheel={handleWheel}>
-            <div id={"chatBox"} className={styles.messageList} ref={messageListRef}>
+            <Box
+                 sx={MessagListContainerStyle}
+                 ref={messageListRef}>
                 {messages.map((messageObj, i) => (<Message isReceivedMessage={(messageObj.receiver === userAddress) ? true : false} encryptedPayload={messageObj.message} timestamp={messageObj.block_time} key={i}/> ))}
-            </div>
-        </div>
+            </Box>
+            <div ref={bottomDivRef}></div>
+        </Box>
+
     )
 }
 
