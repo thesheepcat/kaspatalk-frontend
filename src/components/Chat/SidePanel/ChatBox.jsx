@@ -65,8 +65,6 @@ const ChatBox = (peerName) => {
     },[newAlias])
 
     document.addEventListener("newAlias",(event) =>{
-        console.log(event.detail.address);
-        console.log(peerName.peerName);
         if (event.detail.address === peerName.peerName){
 
         setNewAlias(event.detail.alias);
